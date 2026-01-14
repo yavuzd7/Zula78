@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <title>Gemini REST – Chat-Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #121821;
+      --panel-light: #18202b;
+      --muted: #93a0b4;
+      --text: #e7eefc;
+      --accent: #78a6ff;
+      --danger: #ff6b6b;
+      --ok: #67e8a6;
+      --border: #1d2531;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --radius: 14px;
+    }
+    html, body {
+      background: radial-gradient(1200px 700px at 20% -10%, #142033 0%, var(--bg) 60%);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      margin: 0;
+      padding: 0;
+      line-height: 1.4;
+    }
+    .container {
+      max-width: 980px;
+      margin: 48px auto;
+      padding: 0 16px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 0 0 8px;
+      letter-spacing: 0.2px;
+    }
+    p.sub {
+      margin: 0 0 24px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+    input[type="password"],
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color .15s ease;
+      font-size: 14px;
+    }
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+    }
+    .checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    button {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #1b283d, #182133);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: .15px;
+      transition: transform .02s ease, opacity .15s ease, border-color .15s ease;
+      position: relative;
+    }
+    button.primary {
+      border-color: rgba(120,166,255,0.5);
+      background: linear-gradient(180deg, #2a3f64, #243552);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .spinner {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--muted);
+      border-left-color: var(--text);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    button.loading .spinner { display: block; }
+    button.loading .btn-text { opacity: 0; }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .status {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .status.ok { color: var(--ok); }
+    .status.err { color: var(--danger); }
+    .out {
+      margin-top: 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      overflow: auto;
+    }
+    .title {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin: 0 0 8px;
+    }
+    
+    .rendered-text {
+      font-size: 14px;
+      line-height: 1.6;
+      word-wrap: break-word;
+      color: var(--text);
+    }
+    .rendered-text pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    .rendered-text code {
+      background: var(--panel-light);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.9em;
+    }
+    .rendered-text pre code {
+      background: transparent;
+      padding: 0;
+      font-size: 1em;
+    }
+    .rendered-text h1, .rendered-text h2, .rendered-text h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 5px;
+    }
+    .rendered-text ul, .rendered-text ol {
+      padding-left: 20px;
+    }
+    .rendered-text li { margin-bottom: 5px; }
+    .rendered-text strong { color: var(--accent); }
+    
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    code {
+      font-family: var(--mono);
+    }
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+    
+    .chat-turn {
+      padding: 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: var(--panel-light);
+    }
+    .chat-turn.role-user {
+      background: var(--panel-light);
+      border-color: var(--accent);
+    }
+    .chat-turn.role-model {
+      background: var(--panel);
+      border-color: var(--border);
+    }
+    .chat-role {
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .chat-turn.role-user .chat-role {
+      color: var(--accent);
+    }
+    
+    @media (min-width: 820px) {
+      .row-2 { grid-template-columns: 2fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Gemini API – Chat-Demo</h1>
+      <p class="sub">Führe einen Dialog mit <code>gemini-2.5-flash</code> (mit Timeout, Retries &amp; Markdown-Rendering).</p>
+
+      <div class="grid">
+        <div class="row-2">
+          <div>
+            <label for="apiKey">API-Key (Generative Language API)</label>
+            <input id="apiKey" type="password" placeholder="AIza... (oder leer lassen, wenn via localStorage gespeichert)" autocomplete="off" />
+            <label class="checkbox">
+              <input id="remember" type="checkbox" />
+              API-Key verschlüsselt in diesem Browser speichern (localStorage)
+            </label>
+            <div class="small">Im Browser ist der Key sichtbar. Für Produktion empfiehlt sich ein Backend-Proxy.</div>
+          </div>
+          <div>
+            <label for="model">Modell</label>
+            <select id="model">
+              <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+              <option value="gemini-1.5-flash-latest" selected>gemini-1.5-flash-latest</option>
+              <option value="gemini-1.5-pro-latest">gemini-1.5-pro-latest</option>
+            </select>
+
+            <label for="timeout" style="margin-top:12px; display:block;">Timeout (ms)</label>
+            <input id="timeout" type="text" inputmode="numeric" value="60000" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="prompt">Deine Nachricht (Prompt)</label>
+            <textarea id="prompt">Bitte eine html Beispiel Code erstellen. um eine Simulation für freier Fall darzustellen</textarea>
+          </div>
+        </div>
+
+        <script>
+          // Event Listener für eingehende Nachrichten
+          window.addEventListener("message", function(event) {
+            
+            // Die gesendeten Daten (den Text) abrufen
+            var receivedText = event.data;
+
+            // Überprüfen, ob Daten da sind, um Fehler zu vermeiden
+            if (receivedText) {
+              // Den Text in das Ziel-Textfeld (id="prompt") einfügen
+              var targetField = document.getElementById("prompt");
+              if (targetField) {
+                targetField.value = receivedText;
+                console.log("Text im Iframe empfangen und eingefügt.");
+              }
+            }
+          });
+        </script>
+
+        <div class="actions">
+          <button id="send" class="primary">
+            <span class="btn-text">Anfrage senden</span>
+            <span class="spinner"></span>
+          </button>
+          <button id="clear">Chat-Verlauf leeren</button>
+        </div>
+        <div id="status" class="status"></div>
+
+        <div class="out">
+          <div class="title">Chat-Verlauf</div>
+          <div id="textOut" class="rendered-text">(noch nichts)</div>
+        </div>
+
+        <div classs="out">
+          <div class="title">Letzte Rohantwort (JSON)</div>
+          <pre id="jsonOut">(noch nichts)</pre>
+        </div>
+      </div>
+
+      <div class="footer">
+        Made for local testing • Keine externen Abhängigkeiten • Vanilla JS
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Chat-Verlaufsspeicher ---
+    let chatHistory = [];
+    
+    /**
+     * Wartet eine gegebene Anzahl Millisekunden.
+     */
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    /**
+     * Erzeugt ein kleines zufälliges Jitter.
+     */
+    function jitter(baseMs) {
+      return Math.floor(Math.random() * baseMs);
+    }
+
+    /**
+     * Prüft, ob ein Statuscode für einen erneuten Versuch geeignet ist.
+     */
+    function isRetryableStatus(status) {
+      return status === 429 || (status >= 500 && status <= 599);
+    }
+
+    /**
+     * Extrahiert Text aus der Gemini-Antwort (erster Kandidat, alle text-Parts).
+     */
+    function extractText(responseJson) {
+      const parts = responseJson?.candidates?.[0]?.content?.parts;
+      if (!Array.isArray(parts)) return null;
+      const texts = parts
+        .map((p) => (typeof p?.text === "string" ? p.text : null))
+        .filter(Boolean);
+      return texts.length ? texts.join("\n") : null;
+    }
+
+    /**
+     * Führt einen Fetch mit Timeout und Retries aus.
+     */
+    async function fetchWithRetry(url, init, timeoutMs, maxRetries) {
+      let attempt = 0;
+      let lastError = null;
+
+      while (attempt <= maxRetries) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+          const res = await fetch(url, { ...init, signal: controller.signal });
+          clearTimeout(timer);
+
+          const text = await res.text();
+          let data = null;
+          try { data = text ? JSON.parse(text) : null; } catch { /* Non-JSON */ }
+
+          if (res.ok) return data;
+
+          if (isRetryableStatus(res.status) && attempt < maxRetries) {
+            attempt += 1;
+            const backoffBase = 500 * 2 ** (attempt - 1); 
+            await sleep(backoffBase + jitter(250));
+            continue;
+          }
+
+          const message = data?.error?.message || `Request fehlgeschlagen (HTTP ${res.status})`;
+          const err = new Error(message);
+          err.status = res.status;
+          err.details = data?.error ?? data;
+          throw err;
+        } catch (err) {
+          clearTimeout(timer);
+          const isAbort = err?.name === "AbortError";
+          const isNetwork = !("status" in (err || {})) && !(err instanceof SyntaxError);
+          if ((isAbort || isNetwork) && attempt < maxRetries) {
+            attempt += 1;
+            const backoffBase = 500 * 2 ** (attempt - 1);
+            await sleep(backoffBase + jitter(250));
+            lastError = err;
+            continue;
+          }
+          throw err || lastError || new Error("Unbekannter Netzwerkfehler.");
+        }
+      }
+
+      throw lastError || new Error("Unbekannter Fehler nach allen Retries.");
+    }
+
+    /**
+     * Sendet einen generateContent-Request an die Gemini-API.
+     */
+    async function callGemini(apiKey, model, history, timeoutMs) {
+      if (!apiKey || typeof apiKey !== "string") {
+        throw new Error("Kein gültiger API-Key angegeben.");
+      }
+      const baseUrl = "https://generativelanguage.googleapis.com/v1beta/models";
+      const url = `${baseUrl}/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+      const body = {
+        contents: history
+      };
+
+      const init = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      };
+
+      const maxRetries = 2;
+      const raw = await fetchWithRetry(url, init, timeoutMs, maxRetries);
+      
+      return { 
+        raw, 
+        text: extractText(raw),
+        modelContent: raw?.candidates?.[0]?.content ?? null
+      };
+    }
+
+
+    // --- Minimaler Markdown-Renderer ---
+
+    /**
+     * WICHTIG (Sicherheit): Bereinigt HTML, um XSS zu verhindern.
+     */
+    function escapeHTML(str) {
+      if (!str) return "";
+      return str.replace(/[&<>"']/g, function(m) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[m];
+      });
+    }
+
+    /**
+     * Wandelt einfachen Markdown-Text in HTML um.
+     */
+    function renderSimpleMarkdown(text) {
+      if (!text) return "(kein Text extrahiert)";
+      let html = escapeHTML(text);
+      html = html.replace(/```(\w*?)\n([\s\S]+?)\n```/g, (match, lang, code) => {
+        return `<pre><code class="language-${lang}">${code}</code></pre>`;
+      });
+      html = html.replace(/```(\w*?)\n([\s\S]+?)```/g, (match, lang, code) => {
+        return `<pre><code class="language-${lang}">${code}</code></pre>`;
+      });
+      html = html.replace(/^### (.*)$/gm, '<h3>$1</h3>');
+      html = html.replace(/^## (.*)$/gm, '<h2>$1</h2>');
+      html = html.replace(/^# (.*)$/gm, '<h1>$1</h1>');
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      html = html.replace(/`([^`]+?)`/g, '<code>$1</code>');
+      return html;
+    }
+    
+    // --- Chat-Verlauf Renderer ---
+    
+    /**
+     * Rendert den gesamten Chat-Verlauf im 'textOut'-Element.
+     */
+    function renderChatHistory(history) {
+      textOut.innerHTML = ""; // Verlauf-Container leeren
+      
+      if (history.length === 0) {
+        textOut.innerHTML = "(noch nichts)";
+        return;
+      }
+      
+      history.forEach(turn => {
+        const text = turn.parts.map(p => p.text).join('\n');
+        
+        const turnWrapper = document.createElement('div');
+        turnWrapper.className = `chat-turn role-${turn.role}`;
+        
+        turnWrapper.innerHTML = `
+          <div class="chat-role">${turn.role}</div>
+          ${renderSimpleMarkdown(text)}
+        `;
+        
+        textOut.appendChild(turnWrapper);
+      });
+      
+      textOut.scrollTop = textOut.scrollHeight;
+    }
+
+    // ---------------- UI-Logik ----------------
+
+    const $ = (sel) => document.querySelector(sel);
+    const apiKeyInput = $("#apiKey");
+    const rememberChk = $("#remember");
+    const modelSel = $("#model");
+    const promptArea = $("#prompt");
+    const timeoutInput = $("#timeout");
+    const btnSend = $("#send");
+    const btnClear = $("#clear");
+    const statusEl = $("#status");
+    const textOut = $("#textOut");
+    const jsonOut = $("#jsonOut");
+
+    /** Lädt evtl. gespeicherten Key aus localStorage. */
+    (function initKeyFromStorage() {
+      try {
+        const saved = localStorage.getItem("gemini_api_key_v1");
+        if (saved) {
+          apiKeyInput.value = atob(saved);
+          rememberChk.checked = true;
+        }
+      } catch { /* Ignorieren */ }
+    })();
+
+    /**
+     * Aktualisiert die Statusanzeige.
+     */
+    function setStatus(kind, msg = "") {
+      statusEl.className = "status";
+      if (kind === "loading") statusEl.textContent = msg || "Sende Anfrage ...";
+      else if (kind === "ok") { statusEl.classList.add("ok"); statusEl.textContent = msg || "Fertig."; }
+      else if (kind === "err") { statusEl.classList.add("err"); statusEl.textContent = msg || "Fehler."; }
+      else statusEl.textContent = msg || "";
+    }
+
+    btnClear.addEventListener("click", () => {
+      chatHistory = [];
+      renderChatHistory(chatHistory);
+      jsonOut.textContent = "(noch nichts)";
+      setStatus("idle", "");
+    });
+
+    btnSend.addEventListener("click", async () => {
+      const apiKey = apiKeyInput.value.trim();
+      const model = modelSel.value.trim() || "gemini-1.5-flash-latest";
+      const prompt = promptArea.value.trim();
+      const timeoutMs = Math.max(1000, parseInt(timeoutInput.value, 10) || 60000);
+      
+      if (!prompt) {
+        setStatus("err", "Bitte eine Nachricht eingeben.");
+        return;
+      }
+
+      try {
+        if (rememberChk.checked && apiKey) {
+          localStorage.setItem("gemini_api_key_v1", btoa(apiKey));
+        } else {
+          localStorage.removeItem("gemini_api_key_v1");
+        }
+      } catch { /* Storage evtl. nicht verfügbar */ }
+
+      setStatus("loading", "Sende Anfrage …");
+      btnSend.disabled = true;
+      btnSend.classList.add("loading");
+      
+      chatHistory.push({
+        role: "user",
+        parts: [{ text: prompt }]
+      });
+      
+      renderChatHistory(chatHistory);
+      promptArea.value = ""; // Prompt-Feld leeren
+
+      try {
+        const { raw, modelContent } = await callGemini(apiKey, model, chatHistory, timeoutMs);
+        
+        if (modelContent) {
+          chatHistory.push(modelContent);
+        } else {
+          chatHistory.push({
+            role: "model",
+            parts: [{ text: extractText(raw) || "(Keine Textantwort erhalten)" }]
+          });
+        }
+        
+        renderChatHistory(chatHistory);
+        
+        jsonOut.textContent = JSON.stringify(raw, null, 2);
+        setStatus("ok", "Antwort empfangen.");
+      } catch (err) {
+        const msg = err?.message || "Unbekannter Fehler.";
+        setStatus("err", msg);
+        
+        // Zeige Fehler im Chat-Verlauf an
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'chat-turn';
+        // KORREKTUR: class="chat-role" (fehlendes '=' hinzugefügt)
+        errorDiv.innerHTML = `<div class="chat-role" style="color: var(--danger);">FEHLER</div> ${escapeHTML(msg)}`;
+        textOut.appendChild(errorDiv);
+        textOut.scrollTop = textOut.scrollHeight;
+        
+        // Entferne die letzte User-Nachricht aus dem Verlauf, da sie fehlgeschlagen ist
+        chatHistory.pop();
+        
+      } finally {
+        btnSend.disabled = false;
+        btnSend.classList.remove("loading");
+      }
+    });
+  </script>
+</body>
+</html>

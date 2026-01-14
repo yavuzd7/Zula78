@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfigurator für Physik-Animationen</title>
+    <style>
+        :root {
+            --primary-color: #005A9C;
+            --secondary-color: #F0F8FF; /* Helleres Blau für Hintergründe */
+            --border-color: #B0C4DE;
+            --background-color: #F8F9FA;
+            --text-color: #333;
+            --input-bg-color: #FFFFFF;
+            --button-color: #007BFF;
+            --button-hover-color: #0056b3;
+            --add-button-color: #28a745;
+            --add-button-hover-color: #218838;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--input-bg-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        fieldset {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: #fff;
+        }
+
+        legend {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            padding: 0 10px;
+            margin-left: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box; /* Wichtig für 100% Breite */
+            font-size: 1em;
+            background-color: var(--input-bg-color);
+        }
+        
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group label, .radio-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .inline-input {
+            display: inline-block;
+            width: auto;
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+        
+        .object-section, .interaction-section {
+            border: 1px dashed var(--border-color);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            background-color: var(--secondary-color);
+        }
+        
+        .add-button {
+            display: inline-block;
+            background-color: var(--add-button-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .add-button:hover {
+            background-color: var(--add-button-hover-color);
+        }
+
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--button-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: var(--button-hover-color);
+        }
+        
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap; /* Erlaube Umbruch auf kleinen Bildschirmen */
+            gap: 20px;
+        }
+        
+        .flex-item {
+            flex: 1;
+            min-width: 250px; /* Mindestbreite für Umbruch */
+        }
+
+        .collapsible-section {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .collapsible-section > label {
+            font-size: 1.1em;
+        }
+        .options-box {
+            padding: 15px;
+            margin-top: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+        .options-box.checkbox-group label {
+            width: 48%; /* Zweispaltiges Layout für Checkboxen */
+            display: inline-flex;
+            min-width: 200px; /* Bessere Lesbarkeit */
+        }
+        
+        /* Stile für den neuen Output-Bereich */
+        #prompt-output-container {
+            display: none; /* Standardmäßig ausgeblendet */
+            margin-top: 30px;
+        }
+        
+        #generated-prompt {
+            width: 100%;
+            height: 350px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--secondary-color);
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            resize: vertical;
+        }
+        
+        #copy-prompt-btn {
+            background-color: var(--add-button-color);
+            margin-top: 15px;
+        }
+        #copy-prompt-btn:hover {
+            background-color: var(--add-button-hover-color);
+        }
+        
+        #copy-success-msg {
+            color: var(--add-button-color);
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Konfigurator für Physik-Simulation</h1>
+        <form id="animation-configurator">
+
+            <fieldset>
+                <legend>Teil 1: Grundsetup</legend>
+                <div class="form-group">
+                    <label for="anim-title">Titel der Simulation:</label>
+                    <input type="text" id="anim-title" name="anim_title" placeholder="z.B. Energieerhaltung beim Fadenpendel">
+                </div>
+                <div class="form-group">
+                    <label for="learning-goal">Zentrales Lernziel:</label>
+                    <textarea id="learning-goal" name="learning_goal" placeholder="Was ist die Kernaussage, die Schülerinnen und Schüler verstehen sollen?"></textarea>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>Physikalisches Kernprinzip (optional):</label>
+                    <label><input type="checkbox" name="core_principle" value="Energieerhaltungssatz"> Energieerhaltungssatz</label>
+                    <label><input type="checkbox" name="core_principle" value="Impulserhaltungssatz"> Impulserhaltungssatz</label>
+                    <label><input type="checkbox" name="core_principle" value="Newtons Gesetze"> Newtons Gesetze (1., 2., 3.)</label>
+                    <label><input type="checkbox" name="core_principle" value="Ladungserhaltung"> Ladungserhaltung</label>
+                    <label><input type="checkbox" name="core_principle" value="other"> Andere: <input type="text" class="inline-input" name="core_principle_other"></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Teil 2: Definition des Systems</legend>
+                <div class="flex-container">
+                    <div class="flex-item form-group radio-group">
+                        <label>Gravitation:</label>
+                        <label><input type="radio" name="gravity" value="none" checked> Keine Gravitation</label>
+                        <label><input type="radio" name="gravity" value="earth"> Erdbeschleunigung (9,81 m/s²)</label>
+                        <label><input type="radio" name="gravity" value="moon"> Mondbeschleunigung (1,62 m/s²)</label>
+                        <label><input type="radio" name="gravity" value="custom"> Benutzerdefiniert: <input type="number" class="inline-input" name="gravity_custom" placeholder="m/s²"></label>
+                    </div>
+                    <div class="flex-item form-group radio-group">
+                        <label>Umgebungsmedium:</label>
+                        <label><input type="radio" name="medium" value="vacuum" checked> Vakuum (kein Widerstand)</label>
+                        <label><input type="radio" name="medium" value="air"> Luft (mit Luftwiderstand)</label>
+                        <label><input type="radio" name="medium" value="water"> Wasser</label>
+                    </div>
+                </div>
+                 <div class="form-group checkbox-group">
+                    <label>Globale Felder (optional):</label>
+                    <label><input type="checkbox" name="e_field"> Homogenes E-Feld: Stärke <input type="number" class="inline-input" name="e_field_strength" placeholder="N/C">, Richtung (x,y) <input type="text" class="inline-input" name="e_field_direction" placeholder="z.B. 0,1"></label>
+                    <label><input type="checkbox" name="b_field"> Homogenes B-Feld: Stärke <input type="number" class="inline-input" name="b_field_strength" placeholder="T">, Richtung (x,y) <input type="text" class="inline-input" name="b_field_direction" placeholder="z.B. 0,1"></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Teil 3: Objekte und ihre Eigenschaften</legend>
+                <div id="objects-container">
+                    <div class="object-section">
+                        <h4>Objekt 1</h4>
+                        <div class="form-group">
+                            <label for="obj1-name">Bezeichnung:</label>
+                            <input type="text" id="obj1-name" name="obj1_name" placeholder="z.B. Skater, Elektron, Feder">
+                        </div>
+                        <div class="form-group">
+                            <label>Darstellung als:</label>
+                            <select name="obj1_shape">
+                                <option value="Punktmasse">Punktmasse</option>
+                                <option value="Kugel">Kugel</option>
+                                <option value="Quader">Quader</option>
+                                <option value="Vereinfachte Figur">Vereinfachte Figur</option>
+                            </select>
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item form-group"><label>Masse (kg):</label><input type="number" name="obj1_mass" placeholder="z.B. 80"></div>
+                            <div class="flex-item form-group"><label>Ladung (C):</label><input type="number" name="obj1_charge" placeholder="z.B. 1.6e-19"></div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item form-group"><label>Startposition (x, y) in m:</label><input type="text" name="obj1_pos" placeholder="z.B. 0, 5"></div>
+                            <div class="flex-item form-group"><label>Startgeschwindigkeit (vx, vy) in m/s:</label><input type="text" name="obj1_vel" placeholder="z.B. 10, 0"></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-button" id="addObjectBtn">+ Objekt hinzufügen</button>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Teil 4: Interaktionen & Kräfte</legend>
+                <div id="interactions-container">
+                    <div class="interaction-section">
+                        <h4>Interaktion 1</h4>
+                        <div class="form-group">
+                            <label>Art der Interaktion/Kraft:</label>
+                            <select name="interaction1_type">
+                                <option value="none">-- Bitte wählen --</option>
+                                <option value="Federkraft (Hooke'sches Gesetz)">Federkraft (Hooke'sches Gesetz)</option>
+                                <option value="Seilkraft">Seilkraft</option>
+                                <option value="Reibungskraft">Reibungskraft</option>
+                                <option value="Elektrische Anziehung/Abstoßung (Coulombkraft)">Elektrische Anziehung/Abstoßung (Coulombkraft)</option>
+                                <option value="Lorentzkraft">Lorentzkraft</option>
+                            </select>
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item form-group">
+                                <label>Wirkt zwischen Objekt:</label>
+                                <input type="text" name="interaction1_objA" placeholder="z.B. Objekt 1">
+                            </div>
+                            <div class="flex-item form-group">
+                                <label>und Objekt:</label>
+                                <input type="text" name="interaction1_objB" placeholder="z.B. Untergrund, Fixpunkt (0,0)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="interaction1-params">Spezifische Parameter:</label>
+                            <textarea id="interaction1-params" name="interaction1_params" placeholder="z.B. bei Federkraft: Federkonstante D = 10 N/m, Ruhelänge L0 = 2m"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="add-button" id="addInteractionBtn">+ Interaktion hinzufügen</button>
+            </fieldset>
+
+            <fieldset>
+                <legend>Teil 5: Visualisierung & Datenausgabe</legend>
+                <div class="form-group checkbox-group">
+                    <label>In der Animation selbst anzeigen:</label>
+                    <label><input type="checkbox" name="viz_in_anim" value="Geschwindigkeitspfeil"> Geschwindigkeitspfeil</label>
+                    <label><input type="checkbox" name="viz_in_anim" value="Beschleunigungspfeil"> Beschleunigungspfeil</label>
+                    <label><input type="checkbox" name="viz_in_anim" value="Kraftpfeile (mit Beschriftung)"> Kraftpfeile (mit Beschriftung)</label>
+                    <label><input type="checkbox" name="viz_in_anim" value="Bewegungsspur (Trajektorie)"> Bewegungsspur (Trajektorie)</label>
+                </div>
+                
+                <div class="collapsible-section">
+                    <label><input type="checkbox" name="add_diagram" id="addDiagramCheckbox"> <strong>Diagramm hinzufügen</strong></label>
+                    <div class="options-box" id="diagram-options" style="display: none;">
+                        <div class="flex-container">
+                            <div class="flex-item form-group">
+                                <label>Typ:</label>
+                                <select name="diagram_type">
+                                    <option value="Liniendiagramm">Liniendiagramm</option>
+                                    <option value="Balkendiagramm">Balkendiagramm</option>
+                                </select>
+                            </div>
+                            <div class="flex-item form-group">
+                                <label>x-Achse:</label>
+                                <select name="diagram_x_axis">
+                                    <option value="Zeit">Zeit</option>
+                                    <option value="Position (x)">Position (x)</option>
+                                    <option value="Position (y)">Position (y)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label>y-Achse (Mehrfachauswahl möglich):</label>
+                            <label><input type="checkbox" name="diagram_y_axis" value="Kinetische Energie"> Kinetische Energie</label>
+                            <label><input type="checkbox" name="diagram_y_axis" value="Potentielle Energie"> Potentielle Energie</label>
+                            <label><input type="checkbox" name="diagram_y_axis" value="Gesamtenergie"> Gesamtenergie</label>
+                            <label><input type="checkbox" name="diagram_y_axis" value="Geschwindigkeit"> Geschwindigkeit</label>
+                            <label><input type="checkbox" name="diagram_y_axis" value="Impuls"> Impuls</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <label><input type="checkbox" name="add_table" id="addTableCheckbox"> <strong>Tabelle hinzufügen</strong></label>
+                    <div class="options-box" id="table-options" style="display: none;">
+                        <div class="form-group checkbox-group">
+                            <label>Spalten auswählen (Mehrfachauswahl möglich):</label>
+                            <label><input type="checkbox" name="table_cols" value="Zeit"> Zeit</label>
+                            <label><input type="checkbox" name="table_cols" value="Position (x, y)"> Position (x, y)</label>
+                            <label><input type="checkbox" name="table_cols" value="Geschwindigkeit (vx, vy)"> Geschwindigkeit (vx, vy)</label>
+                            <label><input type="checkbox" name="table_cols" value="Energie (kin.)"> Energie (kin.)</label>
+                            <label><input type="checkbox" name="table_cols" value="Energie (pot.)"> Energie (pot.)</label>
+                            <label><input type="checkbox" name="table_cols" value="Energie (gesamt)"> Energie (gesamt)</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Teil 6: Steuerung & Didaktik</legend>
+                <div class="form-group checkbox-group">
+                    <label>Steuerungselemente für den Nutzer:</label>
+                    <label><input type="checkbox" name="controls" value="Start / Pause" checked> Start / Pause</label>
+                    <label><input type="checkbox" name="controls" value="Neu starten" checked> Neu starten</label>
+                    <label><input type="checkbox" name="controls" value="Slider für Animationsgeschwindigkeit"> Slider für Animationsgeschwindigkeit</label>
+                </div>
+                <div class="form-group">
+                    <label for="didactic-text">Didaktische Einblendungen (optional):</label>
+                    <textarea id="didactic-text" name="didactic_text" placeholder="Sollen während der Animation Textboxen mit Anweisungen oder Fragen erscheinen? Beschreiben Sie hier wann und was."></textarea>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="submit-button" id="generate-btn">Absenden</button>
+        </form>
+        
+        <!-- NEUER BEREICH: Ausgabe für den generierten Prompt -->
+        <div id="prompt-output-container">
+            <h2>Generierter Prompt:</h2>
+            <details>
+                <summary style="cursor: pointer; font-weight: bold; padding: 10px; background: #f0f0f0; border-radius: 5px;">
+                    Generierten Prompt anzeigen / verbergen 🔽
+                </summary>
+            <textarea id="generated-prompt" readonly placeholder="Hier erscheint der generierte Prompt..."></textarea>
+            </details>
+            <div id="copy-success-msg" style="display:none; color: green; margin-top: 10px;">
+                Automatisch an Iframe gesendet!
+            </div>
+        </div>
+        
+        <iframe 
+         id="promptFrame"
+            src="api.html" 
+            height="900" 
+            width="100%" 
+            style="margin-top: 50px; border: none;">
+        </iframe>
+
+
+
+
+    </div>
+
+<script>
+    document.getElementById("generate-btn").addEventListener("click", function() {
+        
+        // WICHTIG: Wir warten 500 Millisekunden (halbe Sekunde).
+        // Das gibt deinem anderen Skript Zeit, den Text erst zu generieren.
+        setTimeout(function() {
+            
+            // 1. Den (jetzt fertigen) Text holen
+            var sourceText = document.getElementById("generated-prompt").value;
+            var iframe = document.getElementById("promptFrame");
+
+            // 2. Nur senden, wenn auch wirklich Text da ist
+            if (sourceText && iframe && iframe.contentWindow) {
+                
+                // Senden
+                iframe.contentWindow.postMessage(sourceText, '*');
+                console.log("Automatisch gesendet:", sourceText);
+
+                // 3. Feedback anzeigen
+                var msg = document.getElementById("copy-success-msg");
+                msg.style.display = "block";
+                
+                // 4. Das Dropdown automatisch öffnen (damit man sieht, dass was passiert ist)
+                document.getElementById("prompt-details").open = true;
+
+                // Nachricht nach 3 Sekunden wieder ausblenden
+                setTimeout(function(){ 
+                    msg.style.display = "none"; 
+                }, 3000);
+            }
+            
+        }, 500); // <-- Hier ist die Verzögerung
+    });
+</script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('animation-configurator');
+            const addObjectBtn = document.getElementById('addObjectBtn');
+            const addInteractionBtn = document.getElementById('addInteractionBtn');
+            const objectsContainer = document.getElementById('objects-container');
+            const interactionsContainer = document.getElementById('interactions-container');
+            
+            const outputContainer = document.getElementById('prompt-output-container');
+            const promptTextarea = document.getElementById('generated-prompt');
+            const copyBtn = document.getElementById('copy-prompt-btn');
+            const copyMsg = document.getElementById('copy-success-msg');
+
+            const addDiagramCheckbox = document.getElementById('addDiagramCheckbox');
+            const diagramOptions = document.getElementById('diagram-options');
+            const addTableCheckbox = document.getElementById('addTableCheckbox');
+            const tableOptions = document.getElementById('table-options');
+
+            let objectCounter = 1;
+            let interactionCounter = 1;
+
+            // --- Logik zum Ein/Ausblenden der Optionen ---
+            addDiagramCheckbox.addEventListener('change', () => {
+                diagramOptions.style.display = addDiagramCheckbox.checked ? 'block' : 'none';
+            });
+            addTableCheckbox.addEventListener('change', () => {
+                tableOptions.style.display = addTableCheckbox.checked ? 'block' : 'none';
+            });
+
+            // --- Logik zum Hinzufügen von Objekten ---
+            addObjectBtn.addEventListener('click', () => {
+                objectCounter++;
+                const newObjectSection = document.createElement('div');
+                newObjectSection.className = 'object-section';
+                
+                // Klonen des Inhalts der ersten Sektion (vereinfacht)
+                // Für eine robuste Lösung wäre ein Template-Tag besser, aber das klont die Struktur
+                const firstSection = objectsContainer.querySelector('.object-section');
+                newObjectSection.innerHTML = firstSection.innerHTML;
+                
+                // IDs und Namen anpassen
+                newObjectSection.querySelector('h4').textContent = `Objekt ${objectCounter}`;
+                newObjectSection.querySelectorAll('input, select, textarea').forEach(el => {
+                    if (el.id) el.id = el.id.replace('obj1', `obj${objectCounter}`).replace('1-name', `${objectCounter}-name`);
+                    if (el.name) el.name = el.name.replace('obj1', `obj${objectCounter}`);
+                    // Werte zurücksetzen
+                    if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+                    else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+                    else el.value = '';
+                });
+                objectsContainer.appendChild(newObjectSection);
+            });
+            
+            // --- Logik zum Hinzufügen von Interaktionen ---
+            addInteractionBtn.addEventListener('click', () => {
+                interactionCounter++;
+                const newInteractionSection = document.createElement('div');
+                newInteractionSection.className = 'interaction-section';
+                
+                const firstSection = interactionsContainer.querySelector('.interaction-section');
+                newInteractionSection.innerHTML = firstSection.innerHTML;
+                
+                // IDs und Namen anpassen
+                newInteractionSection.querySelector('h4').textContent = `Interaktion ${interactionCounter}`;
+                newInteractionSection.querySelectorAll('input, select, textarea').forEach(el => {
+                    if (el.id) el.id = el.id.replace('interaction1', `interaction${interactionCounter}`);
+                    if (el.name) el.name = el.name.replace('interaction1', `interaction${interactionCounter}`);
+                    // Werte zurücksetzen
+                    if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+                    else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+                    else el.value = '';
+                });
+                interactionsContainer.appendChild(newInteractionSection);
+            });
+
+            // --- Logik für Formular-Submit (Prompt-Generierung) ---
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Standard-Submit verhindern
+                const prompt = buildPrompt(form);
+                promptTextarea.value = prompt;
+                outputContainer.style.display = 'block';
+                promptTextarea.style.height = promptTextarea.scrollHeight + 'px'; // Höhe anpassen
+            });
+
+            // --- Logik für Kopier-Button ---
+            copyBtn.addEventListener('click', () => {
+                promptTextarea.select();
+                try {
+                    // Verwende document.execCommand für bessere Kompatibilität in iFrames
+                    document.execCommand('copy');
+                    copyMsg.style.display = 'block';
+                    setTimeout(() => { copyMsg.style.display = 'none'; }, 2000);
+                } catch (err) {
+                    console.error('Kopieren fehlgeschlagen: ', err);
+                }
+            });
+
+            // --- Hauptfunktion zur Prompt-Erstellung ---
+            function buildPrompt(form) {
+                const data = new FormData(form);
+                let p = []; // Array für die Prompt-Teile
+
+                // --- Teil 1: Didaktischer Rahmen ---
+                const title = data.get('anim_title') || 'Physik-Animation';
+                const safeTitle = title.replace(/[^a-zA-Z0-9]/g, '') || 'Animation';
+                p.push(`Erstelle eine HTML Seite namens '${safeTitle}.html'.`);
+                p.push(`\nÜberschrift: "${title}"`);
+                p.push(`Kontext & Lernziel: Das zentrale Lernziel ist: "${data.get('learning_goal')}".`);
+                
+                const principles = getCheckedValues(form, 'core_principle', 'core_principle_other');
+                if (principles.length > 0) {
+                    p.push(`Die Animation soll folgende physikalische Prinzipien verdeutlichen: ${principles.join(', ')}.`);
+                }
+                
+                // --- Teil 2: System ---
+                p.push("\n--- Systemdefinition ---");
+                const gravity = data.get('gravity');
+                let gravityText = "Keine Gravitation";
+                if (gravity === 'earth') gravityText = "Erdbeschleunigung (9,81 m/s²)";
+                else if (gravity === 'moon') gravityText = "Mondbeschleunigung (1,62 m/s²)";
+                else if (gravity === 'custom') gravityText = `Benutzerdefiniert (${data.get('gravity_custom') || 0} m/s²)`;
+                p.push(`Gravitation: ${gravityText}.`);
+                
+                const medium = data.get('medium');
+                let mediumText = "Vakuum (kein Widerstand)";
+                if (medium === 'air') mediumText = "Luft (mit Luftwiderstand)";
+                else if (medium === 'water') mediumText = "Wasser (mit Wasserwiderstand/Auftrieb)";
+                p.push(`Umgebungsmedium: ${mediumText}.`);
+
+                if (data.get('e_field')) {
+                    p.push(`Globale Felder: Es gibt ein homogenes E-Feld (Stärke: ${data.get('e_field_strength')} N/C, Richtung: ${data.get('e_field_direction')}).`);
+                }
+                if (data.get('b_field')) {
+                    p.push(`Globale Felder: Es gibt ein homogenes B-Feld (Stärke: ${data.get('b_field_strength')} T, Richtung: ${data.get('b_field_direction')}).`);
+                }
+
+                // --- Teil 3: Objekte (Dynamisch) ---
+                p.push("\n--- Objekte & Akteure ---");
+                const objectSections = form.querySelectorAll('.object-section');
+                objectSections.forEach((section, index) => {
+                    const i = index + 1;
+                    const name = section.querySelector(`input[name="obj${i}_name"]`).value || `Objekt ${i}`;
+                    const shape = section.querySelector(`select[name="obj${i}_shape"]`).value;
+                    const mass = section.querySelector(`input[name="obj${i}_mass"]`).value;
+                    const charge = section.querySelector(`input[name="obj${i}_charge"]`).value;
+                    const pos = section.querySelector(`input[name="obj${i}_pos"]`).value;
+                    const vel = section.querySelector(`input[name="obj${i}_vel"]`).value;
+                    
+                    p.push(`Definiere Objekt ${i} ("${name}"):`);
+                    p.push(`  - Darstellung: ${shape}`);
+                    if (mass) p.push(`  - Masse: ${mass} kg`);
+                    if (charge) p.push(`  - Ladung: ${charge} C`);
+                    if (pos) p.push(`  - Startposition (x, y): (${pos}) m`);
+                    if (vel) p.push(`  - Startgeschwindigkeit (vx, vy): (${vel}) m/s`);
+                });
+
+                // --- Teil 4: Interaktionen (Dynamisch) ---
+                p.push("\n--- Interaktionen & Kräfte ---");
+                const interactionSections = form.querySelectorAll('.interaction-section');
+                interactionSections.forEach((section, index) => {
+                    const i = index + 1;
+                    const type = section.querySelector(`select[name="interaction${i}_type"]`).value;
+                    if (type !== 'none') {
+                        const objA = section.querySelector(`input[name="interaction${i}_objA"]`).value;
+                        const objB = section.querySelector(`input[name="interaction${i}_objB"]`).value;
+                        const params = section.querySelector(`textarea[name="interaction${i}_params"]`).value;
+                        
+                        p.push(`Definiere Interaktion ${i}:`);
+                        p.push(`  - Art: ${type}`);
+                        p.push(`  - Wirkt zwischen: ${objA} und ${objB}`);
+                        if (params) p.push(`  - Parameter: ${params}`);
+                    }
+                });
+
+                // --- Teil 5: Visualisierung ---
+                p.push("\n--- Visualisierung & Datenausgabe ---");
+                const vizInAnim = getCheckedValues(form, 'viz_in_anim');
+                if (vizInAnim.length > 0) {
+                    p.push(`In der Animation selbst sollen folgende Vektoren/Elemente angezeigt werden: ${vizInAnim.join(', ')}.`);
+                }
+                
+                if (data.get('add_diagram')) {
+                    const dType = data.get('diagram_type');
+                    const dX = data.get('diagram_x_axis');
+                    const dY = getCheckedValues(form, 'diagram_y_axis');
+                    p.push(`Füge ein Diagramm hinzu (Layout: z.B. unter der Animation):`);
+                    p.push(`  - Typ: ${dType}`);
+                    p.push(`  - x-Achse: ${dX}`);
+                    p.push(`  - y-Achse(n): ${dY.join(', ')}`);
+                }
+                
+                if (data.get('add_table')) {
+                    const cols = getCheckedValues(form, 'table_cols');
+                    p.push(`Füge eine Datentabelle hinzu:`);
+                    p.push(`  - Spalten: ${cols.join(', ')}`);
+                }
+
+                // --- Teil 6: Steuerung & Didaktik ---
+                p.push("\n--- Steuerung & Didaktik ---");
+                const controls = getCheckedValues(form, 'controls');
+                p.push(`Der Nutzer soll folgende Steuerungselemente haben: ${controls.join(', ')}.`);
+                
+                const didacticText = data.get('didactic_text');
+                if (didacticText) {
+                    p.push(`Didaktische Einblendungen oder Anweisungen: ${didacticText}`);
+                }
+                
+                // --- Footer: Technische Hinweise ---
+                p.push("\n--- Technische Hinweise ---");
+                p.push("Bitte erstelle eine vollständig lauffähige, einzelne HTML-Datei. Alle CSS- und JavaScript-Elemente sollen inline oder in <style>/<script>-Tags enthalten sein. Verwende modernes ES6-JavaScript und Canvas für die Animation.");
+                p.push("Stelle sicher, dass die Animation physikalisch korrekt ist (z.B. durch numerische Integration wie Euler oder Runge-Kutta, falls komplexe Kräfte wirken).");
+                p.push("Der Code muss gut strukturiert und kommentiert sein, um die Lesbarkeit und Wartbarkeit zu gewährleisten. Verwende SI-Einheiten.");
+                p.push("Binde Bibliotheken (z.B. für Diagramme wie Chart.js oder Plotly) nur über CDN ein.");
+
+                return p.join('\n');
+            }
+
+            // --- Hilfsfunktion zum Sammeln von Checkbox-Werten (inkl. "Andere") ---
+            function getCheckedValues(form, name, otherName = null) {
+                const values = [];
+                form.querySelectorAll(`input[name="${name}"]:checked`).forEach(cb => {
+                    if (cb.value === 'other' && otherName) {
+                        const otherValue = form.querySelector(`input[name="${otherName}"]`).value;
+                        if (otherValue) values.push(otherValue);
+                    } else {
+                        values.push(cb.value);
+                    }
+                });
+                return values;
+            }
+        });
+    </script>
+</body>
+</html>
