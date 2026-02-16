@@ -29,7 +29,6 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
-            /* Ensure fixed footer doesn't cover content at the very bottom of the page */
             padding-bottom: calc(var(--sticky-footer-height) + 40px);
         }
 
@@ -43,7 +42,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        /* Begrenze die Breite der Seite nach dem Landing-Overlay (etwas breiter) */
         .post-landing {
             max-width: 1100px;
             margin: 0 auto;
@@ -56,15 +54,13 @@
             .post-landing { padding-left: 12px; padding-right: 12px; }
         }
 
-        /* Notebook-like wrapper: blue border, transparent interior so inner white blocks keep their backgrounds */
         .page {
-            background-color: transparent; /* no fill inside */
-            border: 2px solid var(--primary-color); /* blue notebook border */
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
             padding: 32px;
             position: relative;
-            /* faint ruled lines in the very background (will be obscured by white inner blocks) */
             background-image: repeating-linear-gradient(to bottom, rgba(0,90,156,0.04) 0px, rgba(0,90,156,0.04) 1px, transparent 1px, transparent 28px);
             background-size: 100% 28px;
             opacity: 0;
@@ -82,7 +78,6 @@
             top: 12px;
             bottom: 12px;
             width: 10px;
-            /* subtle punched-hole marks using primary color */
             background: radial-gradient(circle at 50% 10%, rgba(0,90,156,0.12) 2px, transparent 3px);
             background-repeat: repeat-y;
             background-size: 10px 36px;
@@ -90,81 +85,15 @@
             pointer-events: none;
         }
 
-        /* stronger shadow for the main post-landing wrapper to visually lift the main content */
-        #post-landing-wrapper {
-            box-shadow: 0 24px 60px rgba(0,0,0,0.14);
-        }
+        #post-landing-wrapper { box-shadow: 0 24px 60px rgba(0,0,0,0.14); }
 
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 15px;
-        }
-        
-        h2 {
-            color: var(--primary-color);
-            margin-top: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-        }
+        h1 { color: var(--primary-color); text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--secondary-color); padding-bottom: 15px; }
+        h2 { color: var(--primary-color); margin-top: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
 
-        /* Configurator header: visually separate heading from content */
-        .config-header {
-            background: var(--primary-accent); /* fill entire header with marker color */
-            padding: 22px 20px;
-            border-radius: 10px;
-            border: 2px solid var(--primary-border);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.04);
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+        .form-header h1 { color: var(--primary-color); font-size: 2.5em; margin: 10px 0 0 0; border-bottom: 2px solid var(--marker-color); padding-bottom: 12px; }
+        .phase-badge { background: var(--marker-color); color: var(--primary-color); padding: 5px 15px; border-radius: 20px; font-weight: bold; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; display: inline-block; }
 
-        .config-header h1 {
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 2.2em;
-            padding: 6px 0;
-            font-weight: 700;
-            line-height: 1.05;
-            position: relative;
-            z-index: 1;
-            display: block;
-            border-bottom: none; /* remove global h1 underline */
-            padding-bottom: 0;
-        }
-        /* NEU: Dünne blaue Trennlinie unter der Überschrift in Phase 1 */
-        .form-header h1 {
-            color: var(--primary-color);
-            font-size: 2.5em;
-            margin: 10px 0 0 0;
-            border-bottom: 2px solid var(--marker-color);
-            padding-bottom: 12px;
-        }
-
-        /* Badge for phase indicator */
-        .phase-badge {
-            background: var(--marker-color);
-            color: var(--primary-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            letter-spacing: 1px;
-            display: inline-block;
-        }
-
-        /* Migrated inline styles */
-        .lang-switcher {
-            position: absolute; top: 15px; right: 20px; font-size: 0.9em;
-            background: #f8f9fa; padding: 5px 10px; border-radius: 20px; border: 1px solid #ddd;
-        }
+        .lang-switcher { position: absolute; top: 15px; right: 20px; font-size: 0.9em; background: #f8f9fa; padding: 5px 10px; border-radius: 20px; border: 1px solid #ddd; }
         .lang-btn { background: none; border: none; cursor: pointer; font-weight: bold; color: #333; }
         .lang-sep { color: #ccc; padding: 0 6px; }
 
@@ -192,134 +121,62 @@
         .checkbox-inline { margin-top: 5px; margin-right: 8px; flex-shrink: 0; }
         .note-label { margin-top: 2px; margin-right: 5px; white-space: nowrap; font-weight: bold; }
         .small-vspace { margin-top: 5px; margin-bottom: 5px; }
-        fieldset {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            background-color: #fff;
-        }
-
-        legend {
-            font-weight: bold;
-            font-size: 1.2em;
-            color: var(--primary-color);
-            padding: 0 10px;
-            margin-left: 10px;
-        }
-
+        fieldset { border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 25px; background-color: #fff; }
+        legend { font-weight: bold; font-size: 1.2em; color: var(--primary-color); padding: 0 10px; margin-left: 10px; }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 600; margin-bottom: 8px; }
 
         input[type="text"], input[type="number"], textarea, select {
-            width: 100%; padding: 10px; border: 1px solid var(--border-color);
-            border-radius: 5px; box-sizing: border-box; font-size: 1em;
+            width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 5px; box-sizing: border-box;
+            font-size: 16px !important;
             background-color: var(--input-bg-color);
         }
         input[type="number"] { -moz-appearance: textfield; }
         textarea { resize: vertical; min-height: 80px; }
-
-        .checkbox-group label, .radio-group label {
-            font-weight: normal; display: flex; align-items: center; margin-bottom: 8px;
-        }
+        .checkbox-group label, .radio-group label { font-weight: normal; display: flex; align-items: center; margin-bottom: 8px; }
         input[type="checkbox"], input[type="radio"] { margin-right: 10px; flex-shrink: 0; }
-        
         .inline-input { display: inline-block; width: auto; margin-left: 10px; flex-grow: 1; }
-        
-        .object-section, .interaction-section {
-            border: 1px dashed var(--border-color); padding: 15px; margin-top: 15px;
-            border-radius: 5px; background-color: var(--secondary-color);
-        }
-        
-        .add-button {
-            display: inline-block; background-color: var(--add-button-color); color: white;
-            padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;
-            font-size: 1em; margin-top: 10px; transition: background-color 0.3s ease;
-        }
+       
+        .object-section, .interaction-section { border: 1px dashed var(--border-color); padding: 15px; margin-top: 15px; border-radius: 5px; background-color: var(--secondary-color); }
+        .add-button { display: inline-block; background-color: var(--add-button-color); color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; margin-top: 10px; transition: background-color 0.3s ease; }
         .add-button:hover { background-color: var(--add-button-hover-color); }
-        
-        .delete-btn {
-            background-color: #dc3545; color: white; border: none; border-radius: 4px;
-            padding: 4px 10px; margin-left: 15px; cursor: pointer; font-size: 0.9em;
-            transition: background-color 0.2s;
-        }
+        .delete-btn { background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 4px 10px; margin-left: 15px; cursor: pointer; font-size: 0.9em; transition: background-color 0.2s; }
         .delete-btn:hover { background-color: #c82333; }
-        
-        .submit-button {
-            display: block; width: 100%; padding: 15px; background-color: var(--button-color);
-            color: white; border: none; border-radius: 5px; font-size: 1.2em;
-            font-weight: bold; cursor: pointer; transition: background-color 0.3s ease;
-        }
+        .submit-button { display: block; width: 100%; padding: 15px; background-color: var(--button-color); color: white; border: none; border-radius: 5px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background-color 0.3s ease; }
         .submit-button:hover { background-color: var(--button-hover-color); }
-        
         .flex-container { display: flex; flex-wrap: wrap; gap: 20px; }
         .flex-item { flex: 1; min-width: 250px; }
 
         .collapsible-section { margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0; }
         .collapsible-section > label { font-size: 1.1em; }
-        .options-box {
-            padding: 15px; margin-top: 10px; background-color: var(--secondary-color);
-            border-radius: 5px; border: 1px solid var(--border-color);
-        }
+        .options-box { padding: 15px; margin-top: 10px; background-color: var(--secondary-color); border-radius: 5px; border: 1px solid var(--border-color); }
         .options-box.checkbox-group label { width: 48%; display: inline-flex; min-width: 200px; }
-        
+       
         #prompt-output-container { display: none; margin-top: 30px; }
-        #generated-prompt {
-            width: 100%; height: 350px; padding: 15px; box-sizing: border-box;
-            border: 1px solid var(--border-color); border-radius: 5px;
-            background-color: var(--secondary-color); font-family: Consolas, "Courier New", monospace;
-            font-size: 0.9em; line-height: 1.5; resize: vertical;
-        }
-        
+        #generated-prompt { width: 100%; height: 350px; padding: 15px; box-sizing: border-box; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--secondary-color); font-family: Consolas, "Courier New", monospace; font-size: 0.9em; line-height: 1.5; resize: vertical; }
         #copy-prompt-btn { background-color: var(--add-button-color); margin-top: 15px; }
         #copy-prompt-btn:hover { background-color: var(--add-button-hover-color); }
         #copy-success-msg { color: var(--add-button-color); font-weight: bold; margin-top: 10px; display: none; }
-        
-        .hint-text {
-            text-align: center; color: #666; font-size: 0.9em;
-            margin-top: -20px; margin-bottom: 30px; font-style: italic;
-        }
+        .hint-text { text-align: center; color: #666; font-size: 0.9em; margin-top: -20px; margin-bottom: 30px; font-style: italic; }
         .required { color: red; font-weight: bold; margin-left: 4px; }
 
-        /* Akkordeon */
-        .accordion {
-            background-color: #e9ecef; color: var(--text-color); cursor: pointer;
-            padding: 12px 15px; width: 100%; text-align: left;
-            border: 1px solid var(--border-color); border-radius: 5px; outline: none;
-            transition: 0.3s; font-weight: 600; margin-top: 5px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .accordion { background-color: #e9ecef; color: var(--text-color); cursor: pointer; padding: 12px 15px; width: 100%; text-align: left; border: 1px solid var(--border-color); border-radius: 5px; outline: none; transition: 0.3s; font-weight: 600; margin-top: 5px; display: flex; justify-content: space-between; align-items: center; }
         .accordion:hover, .accordion.active { background-color: #dfe6ed; }
         .accordion:after { content: '\002B'; font-weight: bold; float: right; }
         .accordion.active:after { content: "\2212"; }
-
-        .panel {
-            padding: 0 15px; background-color: white; max-height: 0; overflow: hidden;
-            transition: max-height 0.2s ease-out; border: 1px solid var(--border-color);
-            border-top: none; border-radius: 0 0 5px 5px; margin-bottom: 10px;
-        }
+        .panel { padding: 0 15px; background-color: white; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 5px 5px; margin-bottom: 10px; }
         .panel label { margin-top: 10px; margin-bottom: 10px; display: flex; }
-        
-        .sub-panel {
-            margin-left: 25px; padding-left: 10px; border-left: 3px solid var(--border-color);
-            display: none; margin-bottom: 10px;
-        }
+        .sub-panel { margin-left: 25px; padding-left: 10px; border-left: 3px solid var(--border-color); display: none; margin-bottom: 10px; }
         .sub-panel label { font-size: 0.95em; color: #555; }
 
-        /* Visual Cards */
         .visual-card-group { display: flex; gap: 15px; flex-wrap: wrap; }
-        .visual-card {
-            flex: 1; min-width: 140px; border: 2px solid var(--border-color);
-            border-radius: 10px; padding: 15px; text-align: center; cursor: pointer;
-            transition: all 0.2s; background: white; position: relative;
-        }
+        .visual-card { flex: 1; min-width: 140px; border: 2px solid var(--border-color); border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; transition: all 0.2s; background: white; position: relative; }
         .visual-card input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
         .visual-card:hover { border-color: var(--primary-color); background-color: #f0f8ff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .visual-card:has(input:checked) { border-color: var(--add-button-color); background-color: #e8f5e9; box-shadow: 0 0 0 2px var(--add-button-color) inset; }
         .card-icon { font-size: 2em; display: block; margin-bottom: 5px; }
         .card-title { font-weight: bold; display: block; font-size: 0.95em; }
 
-        /* Progress Bar */
         .progress-wrapper { position: sticky; top: 0; z-index: 90; background: var(--background-color); padding-top: 10px; padding-bottom: 10px; margin-bottom: 20px; }
         .progress-container { width: 100%; background-color: #e0e0e0; border-radius: 10px; height: 10px; overflow: hidden; }
         .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary-color), var(--add-button-color)); transition: width 0.5s ease-in-out; }
@@ -327,188 +184,51 @@
         .progress-wrapper.not-sticky { position: static !important; top: auto !important; z-index: auto !important; box-shadow: none !important; }
         .progress-text { text-align: right; font-size: 0.8em; color: #666; margin-top: 3px; }
 
-        /* LANDING PAGE (Scrollbar + Zentriert) */
-        #landing-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            z-index: 9999;
-            /* Scrollen erlauben */
-            overflow-y: auto; 
-            display: flex;
-            /* WICHTIG: Horizontal zentrieren */
-            justify-content: center; 
-            /* Vertikal oben starten (für Scroll), aber margin:auto regelt die Mitte */
-            align-items: flex-start; 
-            padding: 20px; 
-            box-sizing: border-box;
-        }
-
-        .landing-card {
-            position: relative;
-            background: white;
-            padding: 40px 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            max-width: 600px;
-            width: 100%;
-            border-top: 5px solid var(--primary-color);
-            
-            /* TRICK: Zentriert die Karte vertikal, wenn Platz da ist */
-            margin: auto; 
-            
-            /* NEU: Zentriert den Text INHALTLICH */
-            text-align: center; 
-            
-            pointer-events: auto; 
-        }
-    
+        #landing-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); z-index: 9999; overflow-y: auto; display: flex; justify-content: center; align-items: flex-start; padding: 20px; box-sizing: border-box; }
+        .landing-card { position: relative; background: white; padding: 40px 50px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); max-width: 600px; width: 100%; border-top: 5px solid var(--primary-color); margin: auto; text-align: center; pointer-events: auto; }
         .landing-title { color: var(--primary-color); font-size: 2.5em; margin-bottom: 10px; }
         .landing-subtitle { font-size: 1.2em; color: #666; margin-bottom: 30px; }
-        .features-grid {
-            display: inline-grid; /* WICHTIG: Nur so breit wie nötig */
-            grid-template-columns: 1fr 1fr; 
-            gap: 15px;
-            margin-bottom: 30px; 
-            text-align: left; /* Text innen bleibt links (sieht besser aus bei Icons) */
-            /* WICHTIG: Block selbst zentrieren */
-            margin-left: auto;
-            margin-right: auto;
-            max-width: fit-content;
-        }
+        .features-grid { display: inline-grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; text-align: left; margin-left: auto; margin-right: auto; max-width: fit-content; }
         .feature-item { display: flex; align-items: center; font-size: 0.95em; color: #444; }
         .feature-icon { font-size: 1.5em; margin-right: 10px; }
-        
-        .start-btn-large {
-            background-color: var(--primary-color); color: white; font-size: 1.3em;
-            padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s; font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 90, 156, 0.3);
-        }
-        .start-btn-large:hover {
-            transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 90, 156, 0.4);
-            background-color: var(--button-hover-color);
-        }
-        .template-btn {
-            background-color: white; border: 2px solid #e0e0e0; color: #555;
-            padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;
-            transition: all 0.2s; font-size: 0.95em;
-        }
-        .template-btn:hover {
-            border-color: var(--primary-color); color: var(--primary-color);
-            background-color: #f0f8ff; transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+        .start-btn-large { background-color: var(--primary-color); color: white; font-size: 1.3em; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; font-weight: bold; box-shadow: 0 4px 15px rgba(0, 90, 156, 0.3); }
+        .start-btn-large:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 90, 156, 0.4); background-color: var(--button-hover-color); }
+        .template-btn { background-color: white; border: 2px solid #e0e0e0; color: #555; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.95em; }
+        .template-btn:hover { border-color: var(--primary-color); color: var(--primary-color); background-color: #f0f8ff; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        /* Tooltips */
-        .help-icon {
-            display: inline-block; width: 18px; height: 18px; background-color: #e9ecef;
-            color: var(--primary-color); border-radius: 50%; text-align: center;
-            line-height: 18px; font-size: 12px; font-weight: bold; cursor: help;
-            margin-left: 8px; position: relative;
-        }
-        .help-icon:hover::after {
-            content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%;
-            transform: translateX(-50%); background-color: #333; color: #fff;
-            padding: 8px 12px; border-radius: 6px; font-size: 0.85em; font-weight: normal;
-            white-space: pre-wrap; width: 250px; z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .help-icon:hover::before {
-            content: ''; position: absolute; bottom: 110%; left: 50%; margin-left: -5px;
-            border-width: 5px; border-style: solid; border-color: #333 transparent transparent transparent;
-        }
+        .help-icon { display: inline-block; width: 18px; height: 18px; background-color: #e9ecef; color: var(--primary-color); border-radius: 50%; text-align: center; line-height: 18px; font-size: 12px; font-weight: bold; cursor: help; margin-left: 8px; position: relative; }
+        .help-icon:hover::after { content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 0.85em; font-weight: normal; white-space: pre-wrap; width: 250px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .help-icon:hover::before { content: ''; position: absolute; bottom: 110%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #333 transparent transparent transparent; }
 
-        /* Sticky Footer */
-        .sticky-footer {
-            position: fixed; bottom: 0; left: 0; width: 100%; background: white;
-            padding: 15px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); display: flex;
-            justify-content: center; gap: 20px; z-index: 100; border-top: 1px solid #eee;
-            height: var(--sticky-footer-height);
-        }
+        .sticky-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: white; padding: 15px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; z-index: 100; border-top: 1px solid #eee; height: var(--sticky-footer-height); }
         .footer-spacer { height: var(--sticky-footer-height); }
-        /* Prevent content from being hidden behind the fixed footer */
         #animation-configurator { padding-bottom: calc(var(--sticky-footer-height) + 40px); }
-        
-        /* Missing List */
-        .missing-list {
-            font-size: 0.85em; color: #d9534f; background-color: #fdf2f2;
-            padding: 8px; border-radius: 5px; margin-top: 5px;
-            display: none; border: 1px solid #f5c6cb;
-        }
-        .missing-toggle {
-            background: none; border: none; color: #6c757d; font-size: 0.85em;
-            cursor: pointer; padding: 0; margin-top: 3px; transition: color 0.2s;
-        }
+       
+        .missing-list { font-size: 0.85em; color: #d9534f; background-color: #fdf2f2; padding: 8px; border-radius: 5px; margin-top: 5px; display: none; border: 1px solid #f5c6cb; }
+        .missing-toggle { background: none; border: none; color: #6c757d; font-size: 0.85em; cursor: pointer; padding: 0; margin-top: 3px; transition: color 0.2s; }
         .missing-toggle:hover { color: var(--primary-color); }
 
-        /* Koordinaten Hilfe */
-        .input-with-icon {
-            position: relative; display: flex; align-items: center;
-        }
-        .coord-hint {
-            position: absolute; right: 10px; font-size: 0.8em; color: #999;
-            pointer-events: none; background-color: rgba(255,255,255,0.8); padding: 0 4px;
-        }
-        /* Der iFrame Container bekommt einen schicken Rahmen */
-        #promptFrame {
-            margin-top: 50px;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            background-color: white;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50"><path fill="%23ccc" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"/></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            border: none;
-        }
-
+        .input-with-icon { position: relative; display: flex; align-items: center; }
+        .coord-hint { position: absolute; right: 10px; font-size: 0.8em; color: #999; pointer-events: none; background-color: rgba(255,255,255,0.8); padding: 0 4px; }
+       
+        #promptFrame { margin-top: 50px; border: 2px solid var(--border-color); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: white; border: none; }
         .btn-ghost { background-color: #f8f9fa; border: 1px solid #ccc; color: #555; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.9em; transition: all 0.2s; }
         .btn-danger-outline { background-color: #fff; border: 1px solid #dc3545; color: #dc3545; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
 
-        /* --- HIGHLIGHT FÜR DEN NÄCHSTEN SCHRITT --- */
-        .next-step-highlight {
-            background-color: #e8f4fd;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(0, 90, 156, 0.2);
-            /* Pulsierende Animation */
-            animation: pulse-blue 2s infinite;
-        }
+        .next-step-highlight { background-color: #e8f4fd; border: 2px solid var(--primary-color); border-radius: 8px; padding: 20px; margin-top: 20px; margin-bottom: 20px; text-align: center; position: relative; box-shadow: 0 4px 20px rgba(0, 90, 156, 0.2); animation: pulse-blue 2s infinite; }
+        @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(0, 90, 156, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 90, 156, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 90, 156, 0); } }
+        .arrow-down { font-size: 2em; color: var(--primary-color); display: block; margin-top: 10px; animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
-        @keyframes pulse-blue {
-            0% { box-shadow: 0 0 0 0 rgba(0, 90, 156, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 90, 156, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 90, 156, 0); }
-        }
-
-        .arrow-down {
-            font-size: 2em;
-            color: var(--primary-color);
-            display: block;
-            margin-top: 10px;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-        }
+        /* --- LEHRER SPEZIAL-INFO --- */
+        .teacher-only { display: none; margin-top: 8px; padding: 10px; background-color: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 6px; font-size: 0.85em; color: #2e7d32; }
+        .teacher-diagram { width: 100%; max-width: 200px; height: auto; border: 1px solid #ccc; background: white; margin-top: 5px; display: block; }
     </style>
 </head>
 <body>
 
     <div id="landing-overlay">
         <div class="landing-card">
-            
             <div class="lang-switcher">
                 <button id="lang-btn-de" onclick="setLanguage('de')" class="lang-btn">DE</button>
                 <span class="lang-sep">|</span>
@@ -516,12 +236,11 @@
             </div>
 
             <h1 class="landing-title" data-i18n="landing_title">Physik-Sim Generator</h1>
-            
             <p class="landing-subtitle">
                 <span data-i18n="landing_subtitle">Erstelle interaktive Physik-Simulationen mit KI-Unterstützung.</span><br>
                 <strong data-i18n="landing_sub_code">Ohne eine Zeile Code zu schreiben.</strong>
             </p>
-            
+           
             <div class="features-grid">
                 <div class="feature-item"><span class="feature-icon">⚛️</span> <span data-i18n="feat_engine">Echte Physik-Engine</span></div>
                 <div class="feature-item"><span class="feature-icon">📈</span> <span data-i18n="feat_plots">Live-Diagramme</span></div>
@@ -551,584 +270,450 @@
                     <button class="template-btn" data-type="pendulum" data-i18n="temp_pendulum">⏱️ Fadenpendel</button>
                     <button class="template-btn" data-type="collision" data-i18n="temp_collision">🎱 Elastischer Stoß</button>
                     <button class="template-btn" data-type="orbit" data-i18n="temp_orbit">🪐 Planetenbahn</button>
+                    <button class="template-btn" data-type="monkey">🐒 Affenschuss</button>
                 </div>
             </div>
             <div class="contact-info">
                 Projekt im Rahmen einer Zulassungsarbeit am<br>
-                <strong>Lehrstuhl für Didaktik der Physik, LMU München</strong><br>
-                <br>
+                <strong>Lehrstuhl für Didaktik der Physik, LMU München</strong><br><br>
                 Entwickelt von: <strong>Yichen Wang</strong><br>
-                Feedback? <a href="Yichen.Wang@campus.lmu.de" class="contact-link">Yichen.Wang@campus.lmu.de</a>
-                <br>All rights reserved © 2026
-            </div>
+                Feedback? <a href="mailto:Yichen.Wang@campus.lmu.de" class="contact-link">Yichen.Wang@campus.lmu.de</a>
             </div>
         </div>
     </div>
-    
+   
     <div class="post-landing page" id="post-landing-wrapper">
-    <div class="form-header post-landing" id="main-header">
-            
-            <div style="text-align: center; margin-bottom: 10px;">
-                <span class="phase-badge">Phase 1</span>
+        <div class="form-header post-landing" id="main-header">
+            <div style="text-align: center; margin-bottom: 10px;"><span class="phase-badge">Phase 1</span></div>
+            <h1>Konfigurator für Physik-Simulation</h1>
+
+            <div class="progress-wrapper">
+                <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div class="progress-text" id="progressText">0% der Pflichtfelder (*) ausgefüllt</div>
+                    <button type="button" id="missing-toggle-btn" class="missing-toggle">❓ Was fehlt?</button>
+                </div>
+                <div id="missing-list-container" class="missing-list"></div>
             </div>
-            <h1>
-                Konfigurator für Physik-Simulation
-            </h1>
 
-        <div class="progress-wrapper">
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
+            <p class="hint-text">Hinweis: Felder mit <span class="required">*</span> sind empfehlenswert auszufüllen.</p>
+
+            <div class="toolbar">
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" id="back-to-menu-btn" class="btn-ghost" onclick="document.getElementById('back-to-menu-btn').click()">⬅️ Zum Start-Menü</button>
+                    <button type="button" id="reset-form-btn" class="btn-danger-outline">↻ Formular leeren</button>
+                </div>
+                <div id="save-status" style="font-size: 0.9em; color: var(--add-button-color); font-weight: bold; opacity: 0; transition: opacity 0.5s;">💾 Änderungen automatisch gespeichert</div>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div class="progress-text" id="progressText">0% der Pflichtfelder (*) ausgefüllt</div>
-                <button type="button" id="missing-toggle-btn" class="missing-toggle">❓ Was fehlt?</button>
-            </div>
-            <div id="missing-list-container" class="missing-list"></div>
-        </div>
-
-        <p class="hint-text">Hinweis: Felder mit <span class="required">*</span> sind empfehlenswert auszufüllen.</p>
-
-        <div class="toolbar">
-            <div style="display: flex; gap: 10px;">
-                <button type="button" id="back-to-menu-btn" class="btn-ghost" onclick="document.getElementById('back-to-menu-btn').click()">
-                    ⬅️ Zum Start-Menü
-                </button>
-                <button type="button" id="reset-form-btn" class="btn-danger-outline">
-                    ↻ Formular leeren
-                </button>
-            </div>
-            <div id="save-status" style="font-size: 0.9em; color: var(--add-button-color); font-weight: bold; opacity: 0; transition: opacity 0.5s;">
-                💾 Änderungen automatisch gespeichert
-            </div>
-        </div>
-        
-        <form id="animation-configurator" class="post-landing">
-            <fieldset>
-                <legend>Teil 1: Grundsetup</legend>
-                <div class="form-group">
-                    <label for="anim-title">Titel der Simulation: <span class="required">*</span></label>
-                    <input type="text" id="anim-title" name="anim_title" placeholder="z.B. Energieerhaltung beim Fadenpendel">
-                </div>
-                <div class="form-group">
-                    <label for="learning-goal">Zentrales Lernziel: <span class="required">*</span></label>
-                    <textarea id="learning-goal" name="learning_goal" placeholder="Was ist die Kernaussage, die Schülerinnen und Schüler verstehen sollen?"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Physikalischer Fokus (Kategorie wählen):</label>
-
-                    <button type="button" class="accordion">Mechanik</button>
-                    <div class="panel checkbox-group">
-                        <label><input type="checkbox" name="core_principle" value="Energieerhaltungssatz"> Energieerhaltungssatz</label>
-                        <label><input type="checkbox" name="core_principle" value="Impulserhaltungssatz"> Impulserhaltungssatz</label>
-                        <div class="small-vspace">
-                            <label>
-                                <input type="checkbox" id="newton-toggle" name="core_principle" value="Newtonsche Gesetze"> 
-                                Newtonsche Gesetze
-                            </label>
-                            <div id="newton-sub-options" class="sub-panel">
-                                <label><input type="checkbox" name="core_principle" value="1. Newtonsches Gesetz (Trägheitsprinzip)"> 1. Gesetz (Trägheit)</label>
-                                <label><input type="checkbox" name="core_principle" value="2. Newtonsches Gesetz (F=m*a)"> 2. Gesetz (F = m · a)</label>
-                                <label><input type="checkbox" name="core_principle" value="3. Newtonsches Gesetz (Actio = Reactio)"> 3. Gesetz (Actio = Reactio)</label>
-                            </div>
-                        </div>
-                        <label><input type="checkbox" name="core_principle" value="Drehimpulserhaltung"> Drehimpulserhaltung</label>
-                        <label><input type="checkbox" name="core_principle" value="Hookesches Gesetz"> Hookesches Gesetz</label>
-                        <label><input type="checkbox" name="core_principle" value="Gravitationsgesetz"> Gravitationsgesetz</label>
+       
+            <form id="animation-configurator" class="post-landing">
+               
+                <input type="hidden" id="hidden_prompt_injection" name="hidden_prompt_injection" value="">
+               
+                <fieldset>
+                    <legend>Teil 1: Grundsetup</legend>
+                    <div class="form-group">
+                        <label for="anim-title">Titel der Simulation: <span class="required">*</span></label>
+                        <input type="text" id="anim-title" name="anim_title" placeholder="z.B. Energieerhaltung beim Fadenpendel">
                     </div>
-
-                    <button type="button" class="accordion">Elektromagnetismus</button>
-                    <div class="panel checkbox-group">
-                        <label><input type="checkbox" name="core_principle" value="Ladungserhaltung"> Ladungserhaltung</label>
-                        <label><input type="checkbox" name="core_principle" value="Coulombsches Gesetz"> Coulombsches Gesetz</label>
-                        <label><input type="checkbox" name="core_principle" value="Lorentzkraft"> Lorentzkraft</label>
-                        <label><input type="checkbox" name="core_principle" value="Ohmsches Gesetz"> Ohmsches Gesetz</label>
+                    <div class="form-group">
+                        <label for="learning-goal">Zentrales Lernziel: <span class="required">*</span></label>
+                        <textarea id="learning-goal" name="learning_goal" placeholder="Was ist die Kernaussage, die Schülerinnen und Schüler verstehen sollen?"></textarea>
                     </div>
-
-                    <button type="button" class="accordion">Schwingungen & Wellen</button>
-                    <div class="panel checkbox-group">
-                        <label><input type="checkbox" name="core_principle" value="Superpositionsprinzip"> Superpositionsprinzip</label>
-                    </div>
-
-                    <div class="checkbox-group" style="margin-top: 10px;">
-                         <label><input type="checkbox" name="core_principle" value="other"> Andere: <input type="text" class="inline-input" name="core_principle_other"></label>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Teil 2: Definition des Systems</legend>
-                
-                <div class="form-group">
-                    <label style="margin-bottom: 15px;">Gravitation wählen: <span class="required">*</span></label>
-                    <div class="visual-card-group">
-                        <label class="visual-card">
-                            <input type="radio" name="gravity" value="none">
-                            <span class="card-icon">🚀</span>
-                            <span class="card-title">Keine</span>
-                            <span class="muted-small">Schwerelos</span>
-                        </label>
-                        <label class="visual-card">
-                            <input type="radio" name="gravity" value="earth">
-                            <span class="card-icon">🌍</span>
-                            <span class="card-title">Erde</span>
-                            <span class="muted-small">9,81 m/s²</span>
-                        </label>
-                        <label class="visual-card">
-                            <input type="radio" name="gravity" value="moon">
-                            <span class="card-icon">🌕</span>
-                            <span class="card-title">Mond</span>
-                            <span class="muted-small">1,62 m/s²</span>
-                        </label>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <label style="font-weight:normal;">
-                            <input type="radio" name="gravity" value="custom"> 
-                            Benutzerdefiniert: <input type="number" class="inline-input small-input" name="gravity_custom" placeholder="m/s²">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label style="margin-bottom: 15px;">Umgebungsmedium: <span class="required">*</span></label>
-                    <div class="visual-card-group">
-                        <label class="visual-card">
-                            <input type="radio" name="medium" value="vacuum">
-                            <span class="card-icon">🌌</span>
-                            <span class="card-title">Vakuum</span>
-                            <span class="muted-small">Kein Widerstand</span>
-                        </label>
-                        <label class="visual-card">
-                            <input type="radio" name="medium" value="air">
-                            <span class="card-icon">💨</span>
-                            <span class="card-title">Luft</span>
-                            <span class="muted-small">Luftwiderstand</span>
-                        </label>
-                        <label class="visual-card">
-                            <input type="radio" name="medium" value="water">
-                            <span class="card-icon">💧</span>
-                            <span class="card-title">Wasser</span>
-                            <span class="muted-small">Auftrieb + Bremse</span>
-                        </label>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <label style="font-weight:normal;">
-                            <input type="radio" name="medium" value="other"> 
-                            Andere: <input type="text" class="inline-input small-input-120" name="medium_custom" placeholder="z.B. Öl">
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="form-group checkbox-group">
-                    <label style="font-size: 1.1em; margin-bottom: 15px;">Globale Felder (optional):</label>
-                    
-                    <div style="margin-bottom: 20px; border-left: 3px solid #eee; padding-left: 10px;">
-                        <div>
-                            <label style="font-weight: bold; cursor: pointer;">
-                                <input type="checkbox" name="e_field"> Homogenes E-Feld
-                            </label>
-                        </div>
-                        <div style="margin-left: 28px; margin-top: 5px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="font-size: 0.95em;">Stärke:</span>
-                                <input type="number" name="e_field_strength" placeholder="N/C" class="tiny-input">
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="font-size: 0.95em;">Richtung:</span>
-                                <select name="e_field_select" id="e_field_select" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
-                                    <option value="0, 1">⬆️ Nach oben</option>
-                                    <option value="0, -1">⬇️ Nach unten</option>
-                                    <option value="1, 0">➡️ Nach rechts</option>
-                                    <option value="-1, 0">⬅️ Nach links</option>
-                                    <option value="custom">✏️ Benutzerdefiniert</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="e_field_custom_container" style="display: none; margin-left: 28px; margin-top: 8px;">
-                            <input type="text" id="e_field_custom" name="e_field_custom" placeholder="Vektor z.B. 1, 1" class="medium-input">
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 20px; border-left: 3px solid #eee; padding-left: 10px;">
-                        <div>
-                            <label style="font-weight: bold; cursor: pointer;">
-                                <input type="checkbox" name="b_field"> Homogenes B-Feld
-                            </label>
-                        </div>
-                        <div style="margin-left: 28px; margin-top: 5px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="font-size: 0.95em;">Stärke:</span>
-                                <input type="number" name="b_field_strength" placeholder="T" class="tiny-input">
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="font-size: 0.95em;">Richtung:</span>
-                                <select name="b_field_select" id="b_field_select" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
-                                    <option value="into">⊗ In die Ebene hinein</option>
-                                    <option value="out">⊙ Aus der Ebene heraus</option>
-                                    <option value="custom">✏️ Benutzerdefiniert</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="b_field_custom_container" style="display: none; margin-left: 28px; margin-top: 8px;">
-                            <input type="text" id="b_field_custom" name="b_field_custom" placeholder="Vektor z.B. 0, 0, 1" class="medium-input">
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 10px; border-left: 3px solid #eee; padding-left: 10px;">
-                        <div style="display: flex; align-items: flex-start;">
-                            <label style="display:inline-flex; align-items: flex-start; width: 100%; cursor: pointer;">
-                                <input type="checkbox" name="global_note_active" class="checkbox-inline"> 
-                                <span class="note-label">Anmerkung:</span>
-                                <textarea name="global_note_text" class="inline-input auto-expand" placeholder="Zusätzliche Parameter..." rows="1"></textarea>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Teil 3: Objekte und ihre Eigenschaften</legend>
-                <div id="objects-container">
-                    <div class="object-section">
-                        <div style="border-bottom: 2px solid #eee; margin-bottom: 15px; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
-                            <h4 style="margin: 0; color: var(--primary-color);">Objekt 1</h4>
-                            <label style="font-size: 0.9em; cursor: pointer; color: #d9534f;">
-                                <input type="checkbox" name="obj1_fixed" value="yes"> 🔒 Fixiert (unbeweglich)
-                            </label>
-                        </div>
-
-                        <div class="flex-container" style="align-items: flex-end;">
-                            <div class="flex-item form-group">
-                                <label>Bezeichnung:<span class="required">*</span></label>
-                                <input type="text" name="obj1_name" placeholder="z.B. Flummi">
-                            </div>
-                            <div class="flex-item form-group">
-                                <label>Form:</label>
-                                <select name="obj1_shape">
-                                    <option value="Kreis/Kugel">Kreis / Kugel</option>
-                                    <option value="Rechteck/Quader">Rechteck / Quader</option>
-                                    <option value="Punktmasse">Punktmasse</option>
-                                    <option value="Bild/Icon">Bild / Icon</option>
-                                </select>
-                            </div>
-                            <div class="flex-item form-group" style="flex: 0 0 100px;">
-                                <label>Farbe:</label>
-                                <input type="color" name="obj1_color" value="#3498db" style="height: 42px; padding: 2px; cursor: pointer; width: 100%;">
-                            </div>
-                        </div>
-
-                        <div style="background-color: #eef2f5; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
-                            <label style="font-weight: bold; margin-bottom: 10px; display: block;">Eigenschaften:</label>
-                            <div class="flex-container">
-                                <div class="flex-item form-group" style="margin-bottom: 0;">
-                                    <label>Masse (kg):</label>
-                                    <input type="number" name="obj1_mass" placeholder="z.B. 1.0" min="0" step="0.1">
-                                </div>
-                                <div class="flex-item form-group" style="margin-bottom: 0;">
-                                    <label>Radius/Breite (m):</label>
-                                    <input type="number" name="obj1_size" placeholder="z.B. 0.5" min="0" step="0.01">
-                                </div>
-                                <div class="flex-item form-group" style="margin-bottom: 0;">
-                                    <label>Ladung (C):</label>
-                                    <input type="number" name="obj1_charge" placeholder="z.B. 0">
-                                </div>
-                                <div class="flex-item form-group" style="margin-bottom: 0;">
-                                    <label>Elastizität (0-1): <span class="help-icon" data-tooltip="Wie stark prallt das Objekt ab?&#10;1.0 = Superball (kein Energieverlust)&#10;0.5 = Tennisball&#10;0.0 = Knete (bleibt kleben)">?</span></label>
-                                    <input type="number" name="obj1_bounciness" placeholder="0.8" step="0.1" max="1" min="0">
+                    <div class="form-group">
+                        <label>Physikalischer Fokus (Kategorie wählen):</label>
+                        <button type="button" class="accordion">Mechanik</button>
+                        <div class="panel checkbox-group">
+                            <label><input type="checkbox" name="core_principle" value="Energieerhaltungssatz"> Energieerhaltungssatz</label>
+                            <label><input type="checkbox" name="core_principle" value="Impulserhaltungssatz"> Impulserhaltungssatz</label>
+                            <div class="small-vspace">
+                                <label><input type="checkbox" id="newton-toggle" name="core_principle" value="Newtonsche Gesetze"> Newtonsche Gesetze</label>
+                                <div id="newton-sub-options" class="sub-panel">
+                                    <label><input type="checkbox" name="core_principle" value="1. Newtonsches Gesetz (Trägheitsprinzip)"> 1. Gesetz (Trägheit)</label>
+                                    <label><input type="checkbox" name="core_principle" value="2. Newtonsches Gesetz (F=m*a)"> 2. Gesetz (F = m · a)</label>
+                                    <label><input type="checkbox" name="core_principle" value="3. Newtonsches Gesetz (Actio = Reactio)"> 3. Gesetz (Actio = Reactio)</label>
                                 </div>
                             </div>
+                            <label><input type="checkbox" name="core_principle" value="Drehimpulserhaltung"> Drehimpulserhaltung</label>
+                            <label><input type="checkbox" name="core_principle" value="Hookesches Gesetz"> Hookesches Gesetz</label>
+                            <label><input type="checkbox" name="core_principle" value="Gravitationsgesetz"> Gravitationsgesetz</label>
                         </div>
-
-                        <div class="flex-container">
-                            <div class="flex-item form-group">
-                                <label>Startposition (x, y) [m]:</label>
-                                <div class="input-with-icon">
-                                    <input type="text" name="obj1_pos" placeholder="z.B. 0, 5">
-                                    <span class="coord-hint">X➡ Y⬆</span>
-                                </div>
-                            </div>
-                            <div class="flex-item form-group">
-                                <label>Startgeschwindigkeit (v_x, v_y) [m/s]:</label>
-                                <div class="input-with-icon">
-                                    <input type="text" name="obj1_vel" placeholder="z.B. 10, 0">
-                                    <span class="coord-hint">X➡ Y⬆</span>
-                                </div>
-                            </div>
+                        <button type="button" class="accordion">Elektromagnetismus</button>
+                        <div class="panel checkbox-group">
+                            <label><input type="checkbox" name="core_principle" value="Ladungserhaltung"> Ladungserhaltung</label>
+                            <label><input type="checkbox" name="core_principle" value="Coulombsches Gesetz"> Coulombsches Gesetz</label>
+                            <label><input type="checkbox" name="core_principle" value="Lorentzkraft"> Lorentzkraft</label>
+                            <label><input type="checkbox" name="core_principle" value="Ohmsches Gesetz"> Ohmsches Gesetz</label>
                         </div>
-
-                        <div class="form-group" style="margin-top: 10px;">
-                            <label style="display: flex; align-items: center; cursor: pointer;">
-                                <span style="font-weight: bold; margin-right: 10px;">Anmerkung / Besonderheit:</span>
-                            </label>
-                            <textarea name="obj1_note" class="auto-expand" placeholder="z.B. Soll an einem Seil hängen..." rows="1"></textarea>
+                        <button type="button" class="accordion">Schwingungen & Wellen</button>
+                        <div class="panel checkbox-group">
+                            <label><input type="checkbox" name="core_principle" value="Superpositionsprinzip"> Superpositionsprinzip</label>
+                        </div>
+                        <div class="checkbox-group" style="margin-top: 10px;">
+                             <label><input type="checkbox" name="core_principle" value="other"> Andere: <input type="text" class="inline-input" name="core_principle_other"></label>
                         </div>
                     </div>
-                </div>
-                <button type="button" class="add-button" id="addObjectBtn">+ Objekt hinzufügen</button>
-            </fieldset>
-            
-            <fieldset>
-                <legend>Teil 4: Interaktionen & Kräfte</legend>
-                <div id="interactions-container">
-                    <div class="interaction-section">
-                        <div style="border-bottom: 2px solid #eee; margin-bottom: 15px; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
-                            <h4 style="margin: 0; color: var(--primary-color);">Interaktion 1</h4>
-                            <div>
-                                <label style="font-size: 0.9em; cursor: pointer; margin-right: 10px;">
-                                    <input type="checkbox" name="interaction1_active"> Aktiv
-                                    <span class="help-icon" style="background-color: #adb5bd; color: white;" data-tooltip="Haken setzen: Die Kraft wirkt zwischen den Objekten.&#10;Kein Haken: Falls keine Interaktion vorhanden.">!</span>
-                                </label>
-                                <label style="font-size: 0.9em; cursor: pointer; color: #005A9C;">
-                                    <input type="checkbox" name="interaction1_show_vector"> Vektor zeigen
-                                    <span class="help-icon" style="background-color: #adb5bd; color: white;" data-tooltip="Zeichnet einen Pfeil an das Objekt.&#10;Die Richtung des Pfeils zeigt, wohin die Kraft wirkt.">!</span>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Teil 2: Definition des Systems</legend>
+                    <div class="form-group">
+                        <label style="margin-bottom: 15px;">Gravitation wählen: <span class="required">*</span></label>
+                        <div class="visual-card-group">
+                            <label class="visual-card"><input type="radio" name="gravity" value="none"><span class="card-icon">🚀</span><span class="card-title">Keine</span><span class="muted-small">Schwerelos</span></label>
+                            <label class="visual-card"><input type="radio" name="gravity" value="earth"><span class="card-icon">🌍</span><span class="card-title">Erde</span><span class="muted-small">9,81 m/s²</span></label>
+                            <label class="visual-card"><input type="radio" name="gravity" value="moon"><span class="card-icon">🌕</span><span class="card-title">Mond</span><span class="muted-small">1,62 m/s²</span></label>
+                        </div>
+                        <div style="margin-top: 10px;"><label style="font-weight:normal;"><input type="radio" name="gravity" value="custom"> Benutzerdefiniert: <input type="number" class="inline-input small-input" name="gravity_custom" placeholder="m/s²"></label></div>
+                    </div>
+                    <div class="form-group">
+                        <label style="margin-bottom: 15px;">Umgebungsmedium: <span class="required">*</span></label>
+                        <div class="visual-card-group">
+                            <label class="visual-card"><input type="radio" name="medium" value="vacuum"><span class="card-icon">🌌</span><span class="card-title">Vakuum</span><span class="muted-small">Kein Widerstand</span></label>
+                            <label class="visual-card"><input type="radio" name="medium" value="air"><span class="card-icon">💨</span><span class="card-title">Luft</span><span class="muted-small">Luftwiderstand</span></label>
+                            <label class="visual-card"><input type="radio" name="medium" value="water"><span class="card-icon">💧</span><span class="card-title">Wasser</span><span class="muted-small">Auftrieb + Bremse</span></label>
+                        </div>
+                        <div style="margin-top: 10px;"><label style="font-weight:normal;"><input type="radio" name="medium" value="other"> Andere: <input type="text" class="inline-input small-input-120" name="medium_custom" placeholder="z.B. Öl"></label></div>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label style="font-size: 1.1em; margin-bottom: 15px;">Globale Felder (optional):</label>
+                        <div style="margin-bottom: 20px; border-left: 3px solid #eee; padding-left: 10px;">
+                            <div><label style="font-weight: bold; cursor: pointer;"><input type="checkbox" name="e_field"> Homogenes E-Feld</label></div>
+                            <div style="margin-left: 28px; margin-top: 5px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 5px;"><span style="font-size: 0.95em;">Stärke:</span><input type="number" name="e_field_strength" placeholder="N/C" class="tiny-input"></div>
+                                <div style="display: flex; align-items: center; gap: 5px;"><span style="font-size: 0.95em;">Richtung:</span>
+                                    <select name="e_field_select" id="e_field_select" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
+                                        <option value="0, 1">⬆️ Nach oben</option>
+                                        <option value="0, -1">⬇️ Nach unten</option>
+                                        <option value="1, 0">➡️ Nach rechts</option>
+                                        <option value="-1, 0">⬅️ Nach links</option>
+                                        <option value="custom">✏️ Benutzerdefiniert</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="e_field_custom_container" style="display: none; margin-left: 28px; margin-top: 8px;"><input type="text" id="e_field_custom" name="e_field_custom" placeholder="Vektor z.B. 1, 1" class="medium-input"></div>
+                        </div>
+                        <div style="margin-bottom: 20px; border-left: 3px solid #eee; padding-left: 10px;">
+                            <div><label style="font-weight: bold; cursor: pointer;"><input type="checkbox" name="b_field"> Homogenes B-Feld</label></div>
+                            <div style="margin-left: 28px; margin-top: 5px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 5px;"><span style="font-size: 0.95em;">Stärke:</span><input type="number" name="b_field_strength" placeholder="T" class="tiny-input"></div>
+                                <div style="display: flex; align-items: center; gap: 5px;"><span style="font-size: 0.95em;">Richtung:</span>
+                                    <select name="b_field_select" id="b_field_select" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;">
+                                        <option value="into">⊗ In die Ebene hinein</option>
+                                        <option value="out">⊙ Aus der Ebene heraus</option>
+                                        <option value="custom">✏️ Benutzerdefiniert</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="b_field_custom_container" style="display: none; margin-left: 28px; margin-top: 8px;"><input type="text" id="b_field_custom" name="b_field_custom" placeholder="Vektor z.B. 0, 0, 1" class="medium-input"></div>
+                        </div>
+                        <div style="margin-top: 10px; border-left: 3px solid #eee; padding-left: 10px;">
+                            <div style="display: flex; align-items: flex-start;">
+                                <label style="display:inline-flex; align-items: flex-start; width: 100%; cursor: pointer;">
+                                    <input type="checkbox" name="global_note_active" class="checkbox-inline"> <span class="note-label">Anmerkung:</span>
+                                    <textarea name="global_note_text" class="inline-input auto-expand" placeholder="Zusätzliche Parameter..." rows="1"></textarea>
                                 </label>
                             </div>
                         </div>
-
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label>Art der Interaktion:</label>
-                            <select name="interaction1_type" class="interaction-type-select">
-                                <option value="none">-- Bitte wählen --</option>
-                                <option value="Kollision">Kollision (Stoß)</option>
-                                <option value="Federkraft">Federkraft</option>
-                                <option value="Seilkraft">Seilkraft / Stange</option>
-                                <option value="Gravitation_Newton">Gravitation (Newton)</option>
-                                <option value="Reibungskraft">Reibungskraft</option>
-                                <option value="Coulomb">Coulombkraft</option>
-                                <option value="Lorentz">Lorentzkraft</option>
-                                <option value="custom">🛠️ Benutzerdefiniert</option>
-                            </select>
-                        </div>
-
-                        <div class="custom-interaction-field" style="display: none; background-color: #fff3cd; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #ffeeba;">
-                            <label style="font-weight: bold; color: #856404;">Eigene Formel / Logik:</label>
-                            <input type="text" name="interaction1_custom_formula" placeholder="z.B. F = -0.5 * v">
-                        </div>
-
-                        <div style="display: flex; gap: 15px; align-items: flex-end; margin-bottom: 15px;">
-                            <div style="flex: 1;">
-                                <label style="font-size: 0.9em; font-weight: bold; color: #555;">Objekt A:</label>
-                                <input type="text" name="interaction1_objA" placeholder="z.B. Objekt 1">
-                            </div>
-                            <div style="padding-bottom: 8px; font-size: 1.5em; color: var(--primary-color);">↔️</div>
-                            <div style="flex: 1;">
-                                <label style="font-size: 0.9em; font-weight: bold; color: #555;">Objekt B:</label>
-                                <input type="text" name="interaction1_objB" placeholder="z.B. Objekt 2">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="interaction1-params">Parameter & Details:</label>
-                            <textarea id="interaction1-params" name="interaction1_params" class="auto-expand" placeholder="z.B. Federkonstante D=50..." rows="2" style="font-family: inherit; padding: 8px;"></textarea>
-                        </div>
                     </div>
-                </div>
-                <button type="button" class="add-button" id="addInteractionBtn">+ Interaktion hinzufügen</button>
-            </fieldset>
+                </fieldset>
 
-            <fieldset>
-                <legend>Teil 5: Visualisierung & Analyse</legend>
-                <div class="form-group">
-                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">In der Animation anzeigen:</label>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <label><input type="checkbox" name="viz_in_anim" value="Geschwindigkeitspfeile"> Geschwindigkeit (v)</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Beschleunigungspfeile"> Beschleunigung (a)</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Kraftpfeile"> Kraft (F)</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Spur/Trajektorie"> Spur (Trajektorie)</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Koordinatengitter"> Koordinatengitter</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Live-Werte"> Live-Werte</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Stroboskop"> Stroboskop</label>
-                        <label><input type="checkbox" name="viz_in_anim" value="Energiebalken"> Energiebalken</label>
-                    </div>
-                    <div style="margin-top: 10px;">
-                        <label style="display: flex; align-items: center;">
-                            <input type="checkbox" name="viz_custom_active"> <span style="margin-right: 10px;">Andere:</span>
-                            <input type="text" name="viz_custom_text" placeholder="z.B. Drehimpulsvektor" style="flex: 1;">
-                        </label>
-                    </div>
-                </div>
-
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-
-                <div class="collapsible-section">
-                    <label style="font-weight: bold; font-size: 1.1em; cursor: pointer;">
-                        <input type="checkbox" name="add_diagram" id="addDiagramCheckbox"> 📈 Echtzeit-Diagramm hinzufügen
-                    </label>
-                <div class="options-box" id="diagram-options" style="display: none; background-color: #f8f9fa; border-left: 4px solid var(--primary-color);">
-                        <div class="form-group">
-                            <label>Diagramm-Typ:</label>
-                            <select name="diagram_type" style="width: 100%;">
-                                <option value="Liniendiagramm (Zeitverlauf)">Liniendiagramm (Zeitverlauf)</option>
-                                <option value="Balkendiagramm (Energie)">Balkendiagramm (Energien)</option>
-                                <option value="Scatterplot (Phasenraum)">Scatterplot (Phasenraum)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="flex-container">
-                            <div class="flex-item form-group">
-                                <label>X-Achse:</label>
-                                <select name="diagram_x_axis" id="diag_x_select">
-                                    <option value="Zeit (t)">Zeit (t)</option>
-                                    <option value="Position (x)">Position (x)</option>
-                                    <option value="Position (y)">Position (y)</option>
-                                    <option value="Winkel (phi)">Winkel (φ)</option>
-                                    <option value="custom">✏️ Benutzerdefiniert...</option>
-                                </select>
-                                <input type="text" name="diagram_x_custom" id="diag_x_custom" placeholder="Formel/Größe" style="display:none; margin-top:5px;">
+                <fieldset>
+                    <legend>Teil 3: Objekte und ihre Eigenschaften</legend>
+                    <div id="objects-container">
+                        <div class="object-section">
+                            <div style="border-bottom: 2px solid #eee; margin-bottom: 15px; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: var(--primary-color);">Objekt 1</h4>
+                                <label style="font-size: 0.9em; cursor: pointer; color: #d9534f;"><input type="checkbox" name="obj1_fixed" value="yes"> 🔒 Fixiert (unbeweglich)</label>
                             </div>
-                            <div class="flex-item form-group">
-                                <label>Y-Achse:</label>
-                                <select name="diagram_y_axis" id="diag_y_select">
-                                    <option value="Position (y)">Position (y)</option>
-                                    <option value="Geschwindigkeit (v)">Geschwindigkeit (v)</option>
-                                    <option value="Beschleunigung (a)">Beschleunigung (a)</option>
-                                    <option value="Energie (kin/pot)">Energie (kin + pot)</option>
-                                    <option value="Impuls (p)">Impuls (p)</option>
-                                    <option value="custom">✏️ Benutzerdefiniert...</option>
-                                </select>
-                                <input type="text" name="diagram_y_custom" id="diag_y_custom" placeholder="Formel/Größe" style="display:none; margin-top:5px;">
+                            <div class="flex-container" style="align-items: flex-end;">
+                                <div class="flex-item form-group">
+                                    <label>Bezeichnung:<span class="required">*</span></label>
+                                    <input type="text" name="obj1_name" placeholder="z.B. Flummi">
+                                </div>
+                                <div class="flex-item form-group">
+                                    <label>Form:</label>
+                                    <select name="obj1_shape">
+                                        <option value="Kreis/Kugel">Kreis / Kugel</option>
+                                        <option value="Rechteck/Quader">Rechteck / Quader</option>
+                                        <option value="Punktmasse">Punktmasse</option>
+                                    </select>
+                                </div>
+                                <div class="flex-item form-group" style="flex: 0 0 100px;">
+                                    <label>Farbe:</label>
+                                    <input type="color" name="obj1_color" value="#3498db" style="height: 42px; padding: 2px; cursor: pointer; width: 100%;">
+                                </div>
                             </div>
-                        </div>
-
-                        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
-                            <label style="font-size: 0.95em; color: var(--primary-color); margin-bottom: 8px;">Feste Skalierung (empfohlen):</label>
-                            <div class="flex-container">
-                                <div class="flex-item">
-                                    <label style="font-weight: normal; font-size: 0.9em;">X-Achse (von - bis):</label>
-                                    <div style="display: flex; gap: 5px;">
-                                        <input type="number" name="diag_x_min" placeholder="Min (z.B. 0)" style="width: 50%;">
-                                        <input type="number" name="diag_x_max" placeholder="Max (z.B. 10)" style="width: 50%;">
+                            <div style="background-color: #eef2f5; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                                <label style="font-weight: bold; margin-bottom: 10px; display: block;">Eigenschaften:</label>
+                                <div class="flex-container">
+                                    <div class="flex-item form-group" style="margin-bottom: 0;">
+                                        <label>Masse (kg):</label><input type="number" name="obj1_mass" placeholder="z.B. 1.0" min="0" step="0.1">
                                     </div>
-                                </div>
-                                <div class="flex-item">
-                                    <label style="font-weight: normal; font-size: 0.9em;">Y-Achse (von - bis):</label>
-                                    <div style="display: flex; gap: 5px;">
-                                        <input type="number" name="diag_y_min" placeholder="Min (z.B. -5)" style="width: 50%;">
-                                        <input type="number" name="diag_y_max" placeholder="Max (z.B. 5)" style="width: 50%;">
+                                    <div class="flex-item form-group" style="margin-bottom: 0;">
+                                        <label>Radius/Breite (m):</label><input type="number" name="obj1_size" placeholder="z.B. 0.5" min="0" step="0.01">
+                                    </div>
+                                    <div class="flex-item form-group" style="margin-bottom: 0;">
+                                        <label>Ladung (C):</label><input type="number" name="obj1_charge" placeholder="z.B. 0">
+                                    </div>
+                                    <div class="flex-item form-group" style="margin-bottom: 0;">
+                                        <label>Elastizität (0-1): <span class="help-icon" data-tooltip="0 = Unelastisch&#10;1 = Elastisch">?</span></label>
+                                        <input type="number" name="obj1_bounciness" placeholder="0.8" step="0.1" max="1" min="0">
+                                        <div class="teacher-only">
+                                            <strong>👨‍🏫 Fach-Hintergrund:</strong><br>
+                                            Hier wird der Restitutionskoeffizient $k$ eingestellt ($v' = k \cdot v$). Im Materialzusammenhang entspricht das dem linear-elastischen Bereich (Hookesches Gesetz):
+                                            <svg class="teacher-diagram" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                                                <line x1="20" y1="100" x2="190" y2="100" stroke="black" stroke-width="2" />
+                                                <line x1="20" y1="100" x2="20" y2="10" stroke="black" stroke-width="2" />
+                                                <text x="180" y="115" font-family="sans-serif" font-size="10">ε (Dehnung)</text>
+                                                <text x="5" y="15" font-family="sans-serif" font-size="10">σ</text>
+                                                <line x1="20" y1="100" x2="100" y2="20" stroke="#005A9C" stroke-width="3" />
+                                                <text x="105" y="30" font-family="sans-serif" font-size="10" fill="#005A9C">E-Modul</text>
+                                                <path d="M 100 20 Q 140 15 180 30" stroke="#999" stroke-width="2" stroke-dasharray="4" fill="none"/>
+                                                <text x="120" y="10" font-family="sans-serif" font-size="9" fill="#999">Plastisch</text>
+                                            </svg>
+                                            <div style="font-size:0.8em; margin-top:2px;">Steigung = Elastizitätsmodul $E = \sigma / \epsilon$</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div style="font-size: 0.8em; color: #666; margin-top: 5px;">
+                            <div class="flex-container">
+                                <div class="flex-item form-group">
+                                    <label>Startposition (x, y) [m]:</label>
+                                    <div class="input-with-icon"><input type="text" name="obj1_pos" placeholder="z.B. 0, 5"><span class="coord-hint">X➡ Y⬆</span></div>
+                                </div>
+                                <div class="flex-item form-group">
+                                    <label>Startgeschwindigkeit (v_x, v_y) [m/s]:</label>
+                                    <div class="input-with-icon"><input type="text" name="obj1_vel" placeholder="z.B. 10, 0"><span class="coord-hint">X➡ Y⬆</span></div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 10px;">
+                                <label style="display: flex; align-items: center; cursor: pointer;"><span style="font-weight: bold; margin-right: 10px;">Anmerkung / Besonderheit:</span></label>
+                                <textarea name="obj1_note" class="auto-expand" placeholder="z.B. Soll an einem Seil hängen..." rows="1"></textarea>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="collapsible-section">
-                    <label style="font-weight: bold; font-size: 1.1em; cursor: pointer;">
-                        <input type="checkbox" name="add_table" id="addTableCheckbox"> 📋 Datenerfassung
-                    </label>
-                    <div class="options-box" id="table-options" style="display: none; background-color: #fff3cd; border-left: 4px solid #ffc107;">
-                        <div class="form-group checkbox-group">
-                            <label style="font-weight: 600;">Daten:</label>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
-                                <label><input type="checkbox" name="table_cols" value="Zeit (t)"> Zeit (t)</label>
-                                <label><input type="checkbox" name="table_cols" value="Position (x/y)"> Position (x,y)</label>
-                                <label><input type="checkbox" name="table_cols" value="Geschwindigkeit (v)"> Geschwindigkeit</label>
-                                <label><input type="checkbox" name="table_cols" value="Beschleunigung (a)"> Beschleunigung</label>
-                                <label><input type="checkbox" name="table_cols" value="Energien (E_kin, E_pot)"> Energien</label>
-                                <label><input type="checkbox" name="table_cols" value="Kraft (F)"> Kraft</label>
+                    <button type="button" class="add-button" id="addObjectBtn">+ Objekt hinzufügen</button>
+                </fieldset>
+               
+                <fieldset>
+                    <legend>Teil 4: Interaktionen & Kräfte</legend>
+                    <div id="interactions-container">
+                        <div class="interaction-section">
+                            <div style="border-bottom: 2px solid #eee; margin-bottom: 15px; padding-bottom: 5px; display: flex; justify-content: space-between; align-items: center;">
+                                <h4 style="margin: 0; color: var(--primary-color);">Interaktion 1</h4>
+                                <div>
+                                    <label style="font-size: 0.9em; cursor: pointer; margin-right: 10px;">
+                                        <input type="checkbox" name="interaction1_active"> Aktiv
+                                        <span class="help-icon" style="background-color: #adb5bd; color: white;" data-tooltip="Haken setzen: Die Kraft wirkt zwischen den Objekten.">!</span>
+                                    </label>
+                                    <label style="font-size: 0.9em; cursor: pointer; color: #005A9C;">
+                                        <input type="checkbox" name="interaction1_show_vector"> Vektor zeigen
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex-container" style="margin-top: 15px;">
-                            <div class="flex-item form-group">
-                                <label>Messrate:</label>
-                                <select name="table_frequency">
-                                    <option value="Jeden Frame (Max Details)">Jeden Frame (ca. 60Hz)</option>
-                                    <option value="Alle 0.1 Sekunden" selected>Alle 0.1 Sekunden</option>
-                                    <option value="Alle 0.5 Sekunden">Alle 0.5 Sekunden</option>
-                                    <option value="Alle 1.0 Sekunden">Alle 1.0 Sekunden</option>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label>Art der Interaktion:</label>
+                                <select name="interaction1_type" class="interaction-type-select">
+                                    <option value="none">-- Bitte wählen --</option>
+                                    <option value="Kollision">Kollision (Stoß)</option>
+                                    <option value="Federkraft">Federkraft</option>
+                                    <option value="Seilkraft">Seilkraft / Stange</option>
+                                    <option value="Gravitation_Newton">Gravitation (Newton)</option>
+                                    <option value="Reibungskraft">Reibungskraft</option>
+                                    <option value="Coulomb">Coulombkraft</option>
+                                    <option value="Lorentz">Lorentzkraft</option>
+                                    <option value="custom">🛠️ Benutzerdefiniert</option>
                                 </select>
                             </div>
-                            <div class="flex-item form-group">
-                                <label>Export:</label>
-                                <label style="font-weight: normal;">
-                                    <input type="checkbox" name="table_export_csv" checked> Button "Download als CSV" anzeigen
-                                </label>
+                            <div class="custom-interaction-field" style="display: none; background-color: #fff3cd; padding: 10px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #ffeeba;">
+                                <label style="font-weight: bold; color: #856404;">Eigene Formel / Logik:</label>
+                                <input type="text" name="interaction1_custom_formula" placeholder="z.B. F = -0.5 * v">
+                            </div>
+                            <div style="display: flex; gap: 15px; align-items: flex-end; margin-bottom: 15px;">
+                                <div style="flex: 1;"><label style="font-size: 0.9em; font-weight: bold; color: #555;">Objekt A:</label><input type="text" name="interaction1_objA" placeholder="z.B. Objekt 1"></div>
+                                <div style="padding-bottom: 8px; font-size: 1.5em; color: var(--primary-color);">↔️</div>
+                                <div style="flex: 1;"><label style="font-size: 0.9em; font-weight: bold; color: #555;">Objekt B:</label><input type="text" name="interaction1_objB" placeholder="z.B. Objekt 2"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="interaction1-params">Parameter & Details:</label>
+                                <textarea id="interaction1-params" name="interaction1_params" class="auto-expand" placeholder="z.B. Federkonstante D=50..." rows="2" style="font-family: inherit; padding: 8px;"></textarea>
                             </div>
                         </div>
                     </div>
-                </div>
-            </fieldset>
+                    <button type="button" class="add-button" id="addInteractionBtn">+ Interaktion hinzufügen</button>
+                </fieldset>
 
-            <fieldset>
-                <legend>Teil 6: Steuerung & Didaktik</legend>
-                <div class="form-group checkbox-group">
-                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">Welche Buttons sollen verfügbar sein?<span class="required">*</span></label>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <label><input type="checkbox" name="controls" value="Start / Pause"> Start / Pause</label>
-                        <label><input type="checkbox" name="controls" value="Reset (Neu starten)"> Reset</label>
-                        <label><input type="checkbox" name="controls" value="Einzelschritt (Frame-by-Frame)"> Frame-by-Frame ⏭️</label>
-                        <label><input type="checkbox" name="controls" value="Zeitlupe (Slow Motion)"> Zeitlupe 🐌</label>
-                        <label><input type="checkbox" name="controls" value="Parameter-Reset"> Nur Parameter zurücksetzen ↩️</label>
+                <fieldset>
+                    <legend>Teil 5: Visualisierung & Analyse</legend>
+                    <div class="form-group">
+                        <label style="font-weight: bold; margin-bottom: 10px; display: block;">In der Animation anzeigen:</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <label><input type="checkbox" name="viz_in_anim" value="Geschwindigkeitspfeile"> Geschwindigkeit (v)</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Beschleunigungspfeile"> Beschleunigung (a)</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Kraftpfeile"> Kraft (F)</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Spur/Trajektorie"> Spur (Trajektorie)</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Koordinatengitter"> Koordinatengitter</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Live-Werte"> Live-Werte</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Stroboskop"> Stroboskop</label>
+                            <label><input type="checkbox" name="viz_in_anim" value="Energiebalken"> Energiebalken</label>
+                        </div>
+                        <div style="margin-top: 10px;"><label style="display: flex; align-items: center;"><input type="checkbox" name="viz_custom_active"> <span style="margin-right: 10px;">Andere:</span><input type="text" name="viz_custom_text" placeholder="z.B. Drehimpulsvektor" style="flex: 1;"></label></div>
                     </div>
-                </div>
 
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
-                <div class="collapsible-section">
-                    <label style="font-weight: bold; font-size: 1.1em; color: var(--primary-color);">Vordefinierte Szenarien (Presets)</label>
-                    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Erstellt Buttons, die bestimmte Werte sofort laden.</p>
-                    <div id="scenarios-container"></div>
-                    <button type="button" class="add-button" id="addScenarioBtn" style="background-color: #17a2b8; font-size: 0.9em;">+ Szenario-Button hinzufügen</button>
-                </div>
-
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-
-                <div class="form-group">
-                    <label style="font-weight: bold;">Didaktische Methode:</label>
-                    <select id="didactic_method_select" name="didactic_method" style="margin-bottom: 15px;">
-                        <option value="none">-- Keine (nur Simulation) --</option>
-                        <option value="info">Einfache Infobox (Erklärungstext)</option>
-                        <option value="tasks">Aufgabenliste (Checkliste)</option>
-                    </select>
-                    <div id="method_info_field" style="display: none;">
-                        <label>Erklärungstext:</label>
-                        <textarea name="didactic_info_text" class="auto-expand" rows="2" placeholder="Beschreibe hier den Versuchsaufbau..."></textarea>
+                    <div class="collapsible-section">
+                        <label style="font-weight: bold; font-size: 1.1em; cursor: pointer;"><input type="checkbox" name="add_diagram" id="addDiagramCheckbox"> 📈 Echtzeit-Diagramm hinzufügen</label>
+                        <div class="options-box" id="diagram-options" style="display: none; background-color: #f8f9fa; border-left: 4px solid var(--primary-color);">
+                            <div class="form-group">
+                                <label>Diagramm-Typ:</label>
+                                <select name="diagram_type" style="width: 100%;">
+                                    <option value="Liniendiagramm (Zeitverlauf)">Liniendiagramm (Zeitverlauf)</option>
+                                    <option value="Balkendiagramm (Energie)">Balkendiagramm (Energien)</option>
+                                    <option value="Scatterplot (Phasenraum)">Scatterplot (Phasenraum)</option>
+                                </select>
+                            </div>
+                            <div class="flex-container">
+                                <div class="flex-item form-group">
+                                    <label>X-Achse:</label>
+                                    <select name="diagram_x_axis" id="diag_x_select">
+                                        <option value="Zeit (t)">Zeit (t)</option>
+                                        <option value="Position (x)">Position (x)</option>
+                                        <option value="Position (y)">Position (y)</option>
+                                        <option value="Winkel (phi)">Winkel (φ)</option>
+                                        <option value="custom">✏️ Benutzerdefiniert...</option>
+                                    </select>
+                                    <input type="text" name="diagram_x_custom" id="diag_x_custom" placeholder="Formel/Größe" style="display:none; margin-top:5px;">
+                                </div>
+                                <div class="flex-item form-group">
+                                    <label>Y-Achse:</label>
+                                    <select name="diagram_y_axis" id="diag_y_select">
+                                        <option value="Position (y)">Position (y)</option>
+                                        <option value="Geschwindigkeit (v)">Geschwindigkeit (v)</option>
+                                        <option value="Beschleunigung (a)">Beschleunigung (a)</option>
+                                        <option value="Energie (kin/pot)">Energie (kin + pot)</option>
+                                        <option value="Impuls (p)">Impuls (p)</option>
+                                        <option value="custom">✏️ Benutzerdefiniert...</option>
+                                    </select>
+                                    <input type="text" name="diagram_y_custom" id="diag_y_custom" placeholder="Formel/Größe" style="display:none; margin-top:5px;">
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
+                                <label style="font-size: 0.95em; color: var(--primary-color); margin-bottom: 8px;">Feste Skalierung (Optional, aber empfohlen):</label>
+                                <div class="flex-container">
+                                    <div class="flex-item">
+                                        <label style="font-weight: normal; font-size: 0.9em;">X-Achse (von - bis):</label>
+                                        <div style="display: flex; gap: 5px;"><input type="number" name="diag_x_min" placeholder="Min" style="width: 50%;"><input type="number" name="diag_x_max" placeholder="Max" style="width: 50%;"></div>
+                                    </div>
+                                    <div class="flex-item">
+                                        <label style="font-weight: normal; font-size: 0.9em;">Y-Achse (von - bis):</label>
+                                        <div style="display: flex; gap: 5px;"><input type="number" name="diag_y_min" placeholder="Min" style="width: 50%;"><input type="number" name="diag_y_max" placeholder="Max" style="width: 50%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="method_tasks_field" style="display: none;">
-                        <label>Aufgaben (eine pro Zeile):</label>
-                        <textarea name="didactic_tasks_list" class="auto-expand" rows="3" placeholder="1. Starte die Simulation..."></textarea>
+
+                    <div class="collapsible-section">
+                        <label style="font-weight: bold; font-size: 1.1em; cursor: pointer;"><input type="checkbox" name="add_table" id="addTableCheckbox"> 📋 Datenerfassung</label>
+                        <div class="options-box" id="table-options" style="display: none; background-color: #fff3cd; border-left: 4px solid #ffc107;">
+                            <div class="form-group checkbox-group">
+                                <label style="font-weight: 600;">Daten:</label>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                                    <label><input type="checkbox" name="table_cols" value="Zeit (t)"> Zeit (t)</label>
+                                    <label><input type="checkbox" name="table_cols" value="Position (x/y)"> Position (x,y)</label>
+                                    <label><input type="checkbox" name="table_cols" value="Geschwindigkeit (v)"> Geschwindigkeit</label>
+                                    <label><input type="checkbox" name="table_cols" value="Beschleunigung (a)"> Beschleunigung</label>
+                                    <label><input type="checkbox" name="table_cols" value="Energien (E_kin, E_pot)"> Energien</label>
+                                </div>
+                            </div>
+                            <div class="flex-container" style="margin-top: 15px;">
+                                <div class="flex-item form-group">
+                                    <label>Messrate:</label>
+                                    <select name="table_frequency">
+                                        <option value="Jeden Frame (Max Details)">Jeden Frame</option>
+                                        <option value="Alle 0.1 Sekunden" selected>Alle 0.1 Sekunden</option>
+                                        <option value="Alle 0.5 Sekunden">Alle 0.5 Sekunden</option>
+                                    </select>
+                                </div>
+                                <div class="flex-item form-group">
+                                    <label>Export:</label><label style="font-weight: normal;"><input type="checkbox" name="table_export_csv" checked> Button "Download als CSV" anzeigen</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="method_prediction_field" style="display: none; background-color: #e3f2fd; padding: 15px; border-radius: 5px; border: 1px solid #90caf9;">
-                        <label style="color: #0d47a1;">Frage an den Schüler (vor dem Start):</label>
-                        <input type="text" name="didactic_prediction_question" placeholder="Was passiert bei Kollision?">
-                        <label style="color: #0d47a1;">Antwortmöglichkeiten (kommagetrennt):</label>
-                        <input type="text" name="didactic_prediction_options" placeholder="Abprallen, Kleben bleiben...">
-                        <label style="font-size: 0.9em; margin-top: 5px; color: #555;">
-                            <input type="checkbox" name="didactic_prediction_block"> Simulation sperren, bis geantwortet wurde?
-                        </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Teil 6: Steuerung & Didaktik</legend>
+                    <div class="form-group checkbox-group">
+                        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Welche Buttons sollen verfügbar sein?<span class="required">*</span></label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <label><input type="checkbox" name="controls" value="Start / Pause"> Start / Pause</label>
+                            <label><input type="checkbox" name="controls" value="Reset (Neu starten)"> Reset</label>
+                            <label><input type="checkbox" name="controls" value="Einzelschritt (Frame-by-Frame)"> Frame-by-Frame ⏭️</label>
+                            <label><input type="checkbox" name="controls" value="Zeitlupe (Slow Motion)"> Zeitlupe 🐌</label>
+                            <label><input type="checkbox" name="controls" value="Parameter-Reset"> Nur Parameter zurücksetzen ↩️</label>
+                            <label><input type="checkbox" name="controls" value="Vollbild"> Vollbild-Modus ⛶</label>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                    <div class="collapsible-section">
+                        <label style="font-weight: bold; font-size: 1.1em; color: var(--primary-color);">Vordefinierte Szenarien (Presets)</label>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 5px;">Erstellt Buttons, die bestimmte Werte sofort laden.</p>
+                        <div id="scenarios-container"></div>
+                        <button type="button" class="add-button" id="addScenarioBtn" style="background-color: #17a2b8; font-size: 0.9em;">+ Szenario-Button hinzufügen</button>
+                    </div>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                    <div class="form-group">
+                        <label style="font-weight: bold;">Didaktische Methode:</label>
+                        <select id="didactic_method_select" name="didactic_method" style="margin-bottom: 15px;">
+                            <option value="none">-- Keine (nur Simulation) --</option>
+                            <option value="info">Einfache Infobox (Erklärungstext)</option>
+                            <option value="tasks">Aufgabenliste (Checkliste)</option>
+                            <option value="prediction">Vorhersage-Modus (Quiz vor Start)</option>
+                        </select>
+                        <div id="method_info_field" style="display: none;">
+                            <label>Erklärungstext:</label><textarea name="didactic_info_text" class="auto-expand" rows="2" placeholder="Beschreibe hier den Versuchsaufbau..."></textarea>
+                        </div>
+                        <div id="method_tasks_field" style="display: none;">
+                            <label>Aufgaben (eine pro Zeile):</label><textarea name="didactic_tasks_list" class="auto-expand" rows="3" placeholder="1. Starte die Simulation..."></textarea>
+                        </div>
+                        <div id="method_prediction_field" style="display: none; background-color: #e3f2fd; padding: 15px; border-radius: 5px; border: 1px solid #90caf9;">
+                            <label style="color: #0d47a1;">Frage an den Schüler (vor dem Start):</label><input type="text" name="didactic_prediction_question" placeholder="Was passiert bei Kollision?">
+                            <label style="color: #0d47a1;">Antwortmöglichkeiten (kommagetrennt):</label><input type="text" name="didactic_prediction_options" placeholder="Abprallen, Kleben bleiben...">
+                            <label style="font-size: 0.9em; margin-top: 5px; color: #555;"><input type="checkbox" name="didactic_prediction_block"> Simulation sperren, bis geantwortet wurde?</label>
+                        </div>
+                    </div>
+                </fieldset>
 
-            <fieldset id="hypothesis-section" style="background-color: #fff8e1; border-color: #ffe082;">
-                <legend style="color: #f57f17;">🤔 Deine Vermutung <span class="required">*</span></legend>
-                <div class="form-group">
-                    <label for="student-hypothesis">Bevor du die Simulation startest: 
-                    <p style="font-size: 0.9em; margin-bottom: 10px; color: #666;">Beschreibe kurz, was du erwartest.</p>
-                    <textarea id="student-hypothesis" name="student_hypothesis" class="auto-expand" rows="2" placeholder="Ich vermute, dass... (z.B. 'Je größer die Masse, desto...' oder 'Wenn die Objekte kollidieren, dann...')" style="border: 1px solid #ffe082;"></textarea>
-                </div>
-            </fieldset>
+                <fieldset id="hypothesis-section" style="background-color: #fff8e1; border-color: #ffe082;">
+                    <legend style="color: #f57f17;">🤔 Deine Vermutung <span class="required">*</span></legend>
+                    <div class="form-group">
+                        <label for="student-hypothesis">Bevor du die Simulation startest: <p style="font-size: 0.9em; margin-bottom: 10px; color: #666;">Beschreibe kurz, was du erwartest.</p>
+                        <textarea id="student-hypothesis" name="student_hypothesis" class="auto-expand" rows="2" placeholder="Ich vermute, dass..." style="border: 1px solid #ffe082;"></textarea>
+                    </div>
+                </fieldset>
 
-            <div style="margin-top: 40px; margin-bottom: 40px; text-align: center; border-top: 2px dashed #ccc; padding-top: 20px;">
-                <h3 style="color: #28a745;">🏁 Formular abgeschlossen!</h3>
-                <p style="color: #666; max-width: 600px; margin: 0 auto;">Du hast das Ende erreicht. Überprüfe kurz deine Eingaben oben.</p>
-                <p style="font-size: 0.9em; color: #999; margin-top: 10px;">Danach auf "Simulation erstellen" klicken.</p>
-            </div>
-
-            <div class="footer-spacer"></div>
-            
-            <div class="sticky-footer" style="flex-direction: column; align-items: center; gap: 5px;">
-                <div style="display: flex; gap: 20px; align-items: center;">
-                    <button type="button" class="add-button" style="background-color: #6c757d; margin: 0;" onclick="document.getElementById('back-to-menu-btn').click()">Menü</button>
-                    <button type="submit" class="submit-button" id="generate-btn">🚀 Simulation erstellen</button>
+                <div style="margin-top: 40px; margin-bottom: 40px; text-align: center; border-top: 2px dashed #ccc; padding-top: 20px;">
+                    <h3 style="color: #28a745;">🏁 Formular abgeschlossen!</h3>
+                    <p style="color: #666; max-width: 600px; margin: 0 auto;">Du hast das Ende erreicht. Überprüfe kurz deine Eingaben oben.</p>
+                    <p style="font-size: 0.9em; color: #999; margin-top: 10px;">Danach auf "Simulation erstellen" klicken.</p>
                 </div>
-                <div style="font-size: 0.85em; color: #555;">Klicke hier erst, wenn du mind. alle Felder mit <span style="color:red">*</span> ausgefüllt hast.</div>
-            </div>
-        </form>
-        
-            <div id="workspace-area" class="post-landing" style="display: none; margin-top: 60px; border-top: 4px dashed #e0e0e0; padding-top: 40px;">
-            
+
+                <div class="footer-spacer"></div>
+                <div class="sticky-footer" style="flex-direction: column; align-items: center; gap: 5px;">
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <button type="button" class="add-button" style="background-color: #6c757d; margin: 0;" onclick="document.getElementById('back-to-menu-btn').click()">Menü</button>
+                        <button type="submit" class="submit-button" id="generate-btn">🚀 Simulation erstellen</button>
+                    </div>
+                    <div style="font-size: 0.85em; color: #555;">Klicke hier erst, wenn du mind. alle Felder mit <span style="color:red">*</span> ausgefüllt hast.</div>
+                </div>
+            </form>
+        </div>
+       
+        <div id="workspace-area" class="post-landing" style="display: none; margin-top: 60px; border-top: 4px dashed #e0e0e0; padding-top: 40px;">
             <div style="text-align: center; margin-bottom: 40px;">
                 <span style="background: #e3f2fd; color: var(--primary-color); padding: 5px 15px; border-radius: 20px; font-weight: bold; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px;">Phase 2</span>
                 <h2 style="color: var(--primary-color); font-size: 2.5em; margin: 10px 0 0 0;">🧪 Simulation Workspace</h2>
@@ -1138,9 +723,7 @@
             <div id="prompt-output-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <h3 style="margin: 0; color: #555;">Generierter Prompt:</h3>
-                    <button type="button" id="scroll-up-btn" style="background: white; border: 1px solid var(--border-color); padding: 5px 10px; border-radius: 5px; cursor: pointer; color: var(--primary-color); font-size: 0.9em;">
-                        ✏️ Eingaben korrigieren
-                    </button>
+                    <button type="button" id="scroll-up-btn" style="background: white; border: 1px solid var(--border-color); padding: 5px 10px; border-radius: 5px; cursor: pointer; color: var(--primary-color); font-size: 0.9em;">✏️ Eingaben korrigieren</button>
                 </div>
                 <details id="prompt-details">
                     <summary style="cursor: pointer; font-weight: bold; padding: 10px; background: #f0f0f0; border-radius: 5px;">Generierten Prompt anzeigen / verbergen</summary>
@@ -1148,43 +731,95 @@
                 </details>
                 <div id="copy-success-msg" style="display:none; color: green; margin-top: 10px; font-weight: bold;">✅ Automatisch an das Chat-Fenster unten gesendet!</div>
                 <div class="next-step-highlight">
-                <div style="font-weight: bold; font-size: 1.2em; color: var(--primary-color); margin-bottom: 5px;">
-                    Fast geschafft!
+                    <div style="font-weight: bold; font-size: 1.2em; color: var(--primary-color); margin-bottom: 5px;">Fast geschafft!</div>
+                    <div style="font-size: 1em; color: #333;">Der Prompt wurde erfolgreich generiert. <br>Möchtest du noch etwas ändern? Dann klicke rechts oben auf 'Eingaben korrigieren'.<br>Wenn alles bereit ist, klicke jetzt unten im Chat-Fenster auf:<br>
+                    <span style="background-color: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin: 10px 0;">➤ Anfrage senden</span>
+                    </div>
+                    <div class="arrow-down">⬇️</div>
                 </div>
-                <div style="font-size: 1em; color: #333;">
-                    Der Prompt wurde erfolgreich generiert. 
-                    <br>
-                    Er fasst alle deine Eingaben aus Phase 1 detailliert zusammen.
-                    <br>
-                    Möchtest du noch etwas ändern? 
-                    <br>
-                    Dann klicke rechts oben auf 'Eingaben korrigieren'.
-                    <br>
-                    Wenn alles bereit ist, klicke jetzt unten im Chat-Fenster auf:
-                    <br>
-                    <span style="background-color: var(--primary-color); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin: 10px 0;">
-                        ➤ Anfrage senden
-                    </span>
-                </div>
-                <div class="arrow-down">⬇️</div>
             </div>
+           
+            <iframe id="promptFrame" src="api.html" height="1800" width="100%" style="border: none;"></iframe>
+           
+            <div style="margin-top: 60px; margin-bottom: 20px; padding: 30px; background-color: #f1f8e9; border: 2px solid #81c784; border-radius: 12px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <h3 style="margin-top: 0; color: #2e7d32; font-size: 1.5em;">💾 Experiment beendet?</h3>
+                <p style="color: #555; font-size: 1em; margin-bottom: 15px;"><strong>Schritt 1:</strong> Kopiere den Chatverlauf im Fenster oben (Klick auf "📋 Chat kopieren").<br><strong>Schritt 2:</strong> Füge ihn hier unten ein:</p>
+                <textarea id="chat-history-input" style="width: 90%; height: 150px; padding: 10px; border: 1px solid #81c784; border-radius: 5px; font-family: inherit; font-size: 0.9em; margin-bottom: 20px;" placeholder="Rechtsklick 'Einfügen' oder lange drücken auf dem iPad..."></textarea><br>
+                <button type="button" id="download-protocol-btn" style="background-color: #2e7d32; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-size: 1.2em; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3); transition: transform 0.2s;">📥 Vollständiges Protokoll herunterladen</button>
             </div>
-        
-        <iframe id="promptFrame" src="api.html" height="1800" width="100%"></iframe>
-        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 0.85em; line-height: 1.6;">
-            &copy; 2026 Physik-Sim Konfigurator<br>
-            Zulassungsarbeit am <strong>Lehrstuhl für Didaktik der Physik, LMU München</strong><br>
-            Entwickelt von <strong>Yichen Wang</strong> | <a href="Yichen.Wang@campus.lmu.de" style="color: #777;">Yichen.Wang@campus.lmu.de</a>
-            <br>All rights reserved.
+           
+            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 0.85em; line-height: 1.6;">
+                &copy; 2026 Physik-Sim Konfigurator<br>
+                Zulassungsarbeit am <strong>Lehrstuhl für Didaktik der Physik, LMU München</strong><br>
+                Entwickelt von <strong>Yichen Wang</strong> | <a href="mailto:Yichen.Wang@campus.lmu.de" style="color: #777;">Yichen.Wang@campus.lmu.de</a>
+            </div>
         </div>
     </div>
-    </div> <!-- end #post-landing-wrapper -->
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         try {
+        // --- 1. SETUP & DEFINITIONEN (Ganz oben!) ---
+        const TEMPLATES = {
+            pendulum: {
+                counts: { obj: 2, int: 1, scen: 0 },
+                formValues: {
+                    "anim_title": "Fadenpendel Simulation",
+                    "learning_goal": "Untersuchung der Energieerhaltung und Periodendauer.",
+                    "gravity": "earth",
+                    "core_principle": ["Energieerhaltungssatz"],
+                    "obj1_name": "Aufhängung", "obj1_fixed": "yes", "obj1_pos": "0, 10",
+                    "obj2_name": "Pendel", "obj2_shape": "Kreis/Kugel", "obj2_mass": "2", "obj2_pos": "5, 5",
+                    "interaction1_type": "Seilkraft", "interaction1_objA": "Aufhängung", "interaction1_objB": "Pendel",
+                    "interaction1_active": "on", "interaction1_show_vector": "on",
+                    "add_diagram": "on", "diagram_type": "Liniendiagramm (Zeitverlauf)", "diagram_x_axis": "Zeit (t)", "diagram_y_axis": "Energie (kin/pot)",
+                    "controls": ["Start / Pause", "Reset (Neu starten)"]
+                }
+            },
+            collision: {
+                counts: { obj: 2, int: 1, scen: 2 },
+                formValues: {
+                    "anim_title": "Elastischer Stoß",
+                    "learning_goal": "Impulserhaltung verstehen.",
+                    "gravity": "none", "medium": "vacuum",
+                    "core_principle": ["Impulserhaltungssatz"],
+                    "obj1_name": "Links", "obj1_pos": "-5, 0", "obj1_vel": "4, 0", "obj1_bounciness": "1",
+                    "obj2_name": "Rechts", "obj2_pos": "5, 0", "obj2_vel": "-4, 0", "obj2_bounciness": "1",
+                    "interaction1_type": "Kollision", "interaction1_objA": "Links", "interaction1_objB": "Rechts", "interaction1_active": "on",
+                    "controls": ["Start / Pause", "Reset (Neu starten)"],
+                    "scenario_label_1": "Gleich", "scenario_desc_1": "M1=M2",
+                    "scenario_label_2": "Schwer", "scenario_desc_2": "M2=10"
+                }
+            },
+            orbit: {
+                counts: { obj: 2, int: 1, scen: 0 },
+                formValues: {
+                    "anim_title": "Planetenbahn",
+                    "gravity": "none",
+                    "core_principle": ["Gravitationsgesetz"],
+                    "obj1_name": "Sonne", "obj1_mass": "1000", "obj1_fixed": "yes", "obj1_pos": "0, 0",
+                    "obj2_name": "Erde", "obj2_mass": "10", "obj2_pos": "10, 0", "obj2_vel": "0, 8",
+                    "interaction1_type": "Gravitation_Newton", "interaction1_objA": "Sonne", "interaction1_objB": "Erde", "interaction1_active": "on",
+                    "viz_in_anim": ["Spur/Trajektorie"], "controls": ["Start / Pause"]
+                }
+            },
+            monkey: {
+                counts: { obj: 2, int: 0, scen: 0 },
+                formValues: {
+                    "anim_title": "Affenschuss (Superpositionsprinzip)",
+                    "learning_goal": "Verstehen, dass die waagerechte und senkrechte Bewegung unabhängig sind. Beide Objekte fallen gleich schnell.",
+                    // --- VERSCHÄRFTE GEHEIME LERNZIELE ---
+                    "hidden_prompt_injection": "DEINE ZENTRALEN LERNZIELE FÜR DEN SCHÜLER SIND:\n1. Erklären, warum der Affe trotz Loslassens getroffen wird (Unabhängigkeit der Bewegungen).\n2. Die Bewegung beim schrägen Wurf analysieren.\n3. Die Situation mathematisch modellieren.\nDIDAKTISCHE REGELN FÜR DEN CHAT (ZUSÄTZLICH ZUM CODE):\n1. Verrate die Lösung NIEMALS sofort! Keine direkten Antworten.\n2. In deiner ERSTEN Nachricht: Begrüße den Schüler freundlich als 'Tutor Newton', gib ihm den HTML-Code, und frage GANZ AM ENDE explizit: 'Bitte starte jetzt die Simulation und schau, was passiert! Hat die Kugel getroffen? Schreib mir deine Beobachtung hier in den Chat!'\n3. Wenn der Schüler antwortet, führe SOKRATISCHE DIALOGE.\nBAU-HINWEIS: Zeichne zwingend Trajektorien ein und füge eine gestrichelte horizontale Linie zwischen Kugel und Affe ein, um zu zeigen, dass sie stets auf derselben y-Höhe sind.",
+                    "gravity": "earth", "medium": "vacuum",
+                    "core_principle": ["Superpositionsprinzip", "Newtonsche Gesetze"],
+                    "obj1_name": "Projektil", "obj1_shape": "Kreis/Kugel", "obj1_mass": "0.1", "obj1_size": "0.2", "obj1_pos": "0, 0", "obj1_vel": "15, 8", "obj1_color": "#e74c3c",
+                    "obj2_name": "Affe", "obj2_shape": "Kreis/Kugel", "obj2_mass": "5", "obj2_size": "0.5", "obj2_pos": "15, 8", "obj2_vel": "0, 0", "obj2_color": "#8e44ad", "obj1_note": "Zielt exakt auf den Affen.", "obj2_note": "Lässt im exakt gleichen Moment los, in dem das Projektil abgefeuert wird.",
+                    "viz_in_anim": ["Spur/Trajektorie", "Geschwindigkeitspfeile"],
+                    "controls": ["Start / Pause", "Reset (Neu starten)", "Zeitlupe (Slow Motion)"]
+                }
+            }
+        };
 
-        // --- SPRACH-KONFIGURATION ---
         const translations = {
             de: {
                 "landing_title": "Physik-Sim Generator",
@@ -1225,27 +860,20 @@
         window.setLanguage = function(lang) {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.innerText = translations[lang][key];
-                }
+                if (translations[lang][key]) el.innerText = translations[lang][key];
             });
             document.getElementById('lang-btn-de').style.fontWeight = lang === 'de' ? 'bold' : 'normal';
             document.getElementById('lang-btn-en').style.fontWeight = lang === 'en' ? 'bold' : 'normal';
         };
 
-        // --- 1. CONFIG & ELEMENTE ---
-        // Hintergrund einfrieren, damit nur die Startseite scrollt
         document.body.style.overflow = 'hidden';
         const form = document.getElementById('animation-configurator');
-        
-        // Output Elemente
         const outputContainer = document.getElementById('prompt-output-container');
         const promptTextarea = document.getElementById('generated-prompt');
         const detailsElement = document.getElementById('prompt-details');
         const copyMsg = document.getElementById('copy-success-msg');
         const iframe = document.getElementById("promptFrame");
 
-        // Buttons
         const addObjectBtn = document.getElementById('addObjectBtn');
         const addInteractionBtn = document.getElementById('addInteractionBtn');
         const addScenarioBtn = document.getElementById('addScenarioBtn');
@@ -1253,72 +881,52 @@
         const backToMenuBtn = document.getElementById('back-to-menu-btn');
         const startAppBtn = document.getElementById('start-app-btn');
         const copyBtn = document.getElementById('copy-prompt-btn');
+        const scrollUpBtn = document.getElementById('scroll-up-btn');
 
-        // Container
         const objectsContainer = document.getElementById('objects-container');
         const interactionsContainer = document.getElementById('interactions-container');
         const scenariosContainer = document.getElementById('scenarios-container');
         const landingOverlay = document.getElementById('landing-overlay');
         const saveStatus = document.getElementById('save-status');
+        const workspaceArea = document.getElementById('workspace-area');
 
-        // Storage Key
         const storageKey = 'physics_config_v1';
-
-        // Globale Zähler
         let objectCounter = 1;
         let interactionCounter = 1;
         let progressLocked = false;
         let submitted = false;
 
-
-        // --- 2. PROGRESS BAR LOGIK ---
         function updateProgressBar() {
             let missing = [];
-            
-            // 1. Titel (*)
             const title = document.getElementById('anim-title');
             if (!title || title.value.trim().length === 0) missing.push("Titel der Simulation");
-
-            // 2. Lernziel (*)
             const goal = document.getElementById('learning-goal');
             if (!goal || goal.value.trim().length === 0) missing.push("Lernziel");
-
-            // 3. Gravitation (*)
             if (!document.querySelector('input[name="gravity"]:checked')) missing.push("Gravitation (Teil 2)");
-
-            // 4. Medium (*)
             if (!document.querySelector('input[name="medium"]:checked')) missing.push("Umgebungsmedium (Teil 2)");
-
-            // 5. Objekt 1 Name (*)
             const obj1Name = document.querySelector('input[name="obj1_name"]');
             if (!obj1Name || obj1Name.value.trim().length === 0) missing.push("Name von Objekt 1");
-
-            // 6. Controls (*)
             if (document.querySelectorAll('input[name="controls"]:checked').length === 0) missing.push("Steuerungs-Buttons (Teil 6)");
 
-            // 7. Hypothese (nur Schüler) (*)
             const role = localStorage.getItem('physics_user_role') || 'student';
             if (role === 'student') {
                 const hypo = document.getElementById('student-hypothesis');
                 if (!hypo || hypo.value.trim().length < 3) missing.push("Deine Vermutung (Hypothese)");
             }
 
-            // --- BERECHNUNG ---
             let totalRequired = (role === 'student') ? 7 : 6;
             let filledCount = totalRequired - missing.length;
             let percentage = Math.round((filledCount / totalRequired) * 100);
             if (percentage < 0) percentage = 0; if (percentage > 100) percentage = 100;
 
-            // --- UI UPDATE ---
             const bar = document.getElementById('progressBar');
             const text = document.getElementById('progressText');
             const missingToggleBtn = document.getElementById('missing-toggle-btn');
             const missingListContainer = document.getElementById('missing-list-container');
 
             if (bar && text) {
-                // textual/status updates always reflect current state
                 if (missing.length === 0) {
-                    text.textContent = "100% - Alles ausgefüllt! 🚀";
+                    text.textContent = "🎉 100 % der Pflichtfelder erfüllt! Jetzt kannst du „Simulation erstellen“ anklicken. Mehr Angaben = besseres Ergebnis & weniger Anpassungen 🚀";
                     text.style.color = '#28a745';
                     text.style.fontWeight = 'bold';
                     if (missingToggleBtn) missingToggleBtn.style.display = 'none';
@@ -1331,26 +939,25 @@
                     if (missingListContainer) missingListContainer.innerHTML = "<strong>Noch offen:</strong> " + missing.join(", ");
                 }
 
-                // Update bar width and color (always reflect real progress)
                 bar.style.width = percentage + '%';
-                if (missing.length === 0) {
-                    bar.style.backgroundColor = '#28a745';
-                } else {
-                    if (percentage < 30) bar.style.backgroundColor = '#dc3545';
-                    else if (percentage < 70) bar.style.backgroundColor = '#ffc107';
-                    else bar.style.backgroundColor = '#17a2b8';
-                }
+                if (missing.length === 0) bar.style.backgroundColor = '#28a745';
+                else if (percentage < 30) bar.style.backgroundColor = '#dc3545';
+                else if (percentage < 70) bar.style.backgroundColor = '#ffc107';
+                else bar.style.backgroundColor = '#17a2b8';
 
-                // Lock visual transitions when finished; apply non-sticky only when user also submitted
                 const wrapper = document.querySelector('.progress-wrapper');
+                const submitBtn = document.getElementById('generate-btn');
+               
                 if (percentage === 100) {
                     progressLocked = true;
                     bar.classList.add('locked');
+                    if(submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = "1"; }
                 } else {
                     if (progressLocked) {
                         progressLocked = false;
                         bar.classList.remove('locked');
                     }
+                    if(submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = "0.5"; }
                 }
                 if (wrapper) {
                     if (progressLocked && submitted) wrapper.classList.add('not-sticky');
@@ -1373,8 +980,6 @@
             });
         }
 
-
-        // --- 3. EVENT LISTENERS & SPEICHERN ---
         function debounce(func, wait) {
             let timeout;
             return function(...args) {
@@ -1386,81 +991,65 @@
 
         form.addEventListener('input', () => { updateProgressBar(); saveDebounced(); });
         form.addEventListener('change', () => { updateProgressBar(); saveToStorage(); });
-
-        // Ensure progress is recalculated on load and unlock on full reload
         window.addEventListener('load', () => { progressLocked = false; submitted = false; const wrapper = document.querySelector('.progress-wrapper'); if (wrapper) wrapper.style.display = 'block'; updateProgressBar(); });
 
-
-       // --- 4. ZENTRALE ABSENDEN-LOGIK ---
         form.addEventListener('submit', (e) => {
-            e.preventDefault(); 
-            
-            // 1. Header loslassen (damit er nicht mehr klebt/mitscrollt)
+            e.preventDefault();
             const header = document.getElementById('main-header');
-            if(header) { header.style.position = 'static'; }
+            if(header) header.style.position = 'static';
+            if(workspaceArea) workspaceArea.style.display = 'block';
 
-            // 2. Workspace einblenden
-            const workspace = document.getElementById('workspace-area');
-            if(workspace) {
-                workspace.style.display = 'block';
-            }
-
-            // 3. Prompt generieren
             const prompt = buildPrompt(form);
             promptTextarea.value = prompt;
-            
-            // Prompt-Container sichtbar machen (falls er versteckt war)
             outputContainer.style.display = 'block';
-            if(detailsElement) detailsElement.open = false; 
-            
-            // Textarea Größe anpassen
+            if(detailsElement) detailsElement.open = false;
             promptTextarea.style.height = 'auto';
-            promptTextarea.style.height = (promptTextarea.scrollHeight + 5) + 'px'; 
+            promptTextarea.style.height = (promptTextarea.scrollHeight + 5) + 'px';
 
-            // 4. An iFrame senden
+            navigator.clipboard.writeText(prompt).then(() => {
+                if(copyMsg) {
+                    copyMsg.style.display = 'block';
+                    copyMsg.innerText = "✅ Prompt wurde automatisch kopiert! Drücke unten nur noch Einfügen.";
+                }
+            }).catch(err => { console.error('Auto-copy failed', err); });
+
             if (iframe && iframe.contentWindow) {
-                iframe.contentWindow.postMessage(prompt, '*');
-                console.log("Prompt gesendet.");
-                
-                // Feedback (grüner Text)
+                const hiddenText = new FormData(form).get('hidden_prompt_injection') || "";
+                iframe.contentWindow.postMessage({
+                    visiblePrompt: prompt,
+                    secretSystemInstruction: hiddenText
+                }, '*');
+               
                 copyMsg.style.display = "block";
-                setTimeout(() => { copyMsg.style.display = "none"; }, 3000);
+                setTimeout(() => { copyMsg.style.display = "none"; }, 4000);
             }
 
-            // 5. SCROLLEN (Das ist der wichtige Teil!)
-            // Wir scrollen explizit zum WORKSPACE Container, nicht zum Prompt.
-            if (workspace) {
-                // Kurzer Timeout hilft manchmal, damit der Browser das 'display:block' erst verarbeitet
+            if (workspaceArea) {
                 setTimeout(() => {
-                    const yOffset = -20; // Kleiner Abstand nach oben
-                    const y = workspace.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    const yOffset = -20;
+                    const y = workspaceArea.getBoundingClientRect().top + window.pageYOffset + yOffset;
                     window.scrollTo({top: y, behavior: 'smooth'});
                 }, 50);
             }
         });
 
-        // Robust handler for 'Eingaben korrigieren' button -> scroll back to top of form and focus
-        const scrollUpBtn = document.getElementById('scroll-up-btn');
-        if (scrollUpBtn) {
-            scrollUpBtn.addEventListener('click', () => {
-                const formEl = document.getElementById('animation-configurator') || document.querySelector('.container');
-                if (!formEl) return;
-                const prog = document.querySelector('.progress-wrapper');
-                let offset = 12;
-                if (prog && !prog.classList.contains('not-sticky')) {
-                    offset = prog.getBoundingClientRect().height + 8;
-                }
-                const y = formEl.getBoundingClientRect().top + window.pageYOffset - offset;
-                window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-                setTimeout(() => {
-                    const first = formEl.querySelector('input, textarea, select, button');
-                    if (first && typeof first.focus === 'function') first.focus();
-                }, 450);
+        if(copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                promptTextarea.select();
+                document.execCommand('copy');
+                copyMsg.textContent = "Kopiert!";
+                copyMsg.style.display = 'block';
+                setTimeout(() => { copyMsg.style.display = 'none'; }, 2000);
             });
         }
-        // --- 5. OBJEKTE & INTERAKTIONEN ---
+        if (scrollUpBtn) {
+            scrollUpBtn.addEventListener('click', () => {
+                document.getElementById('animation-configurator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
         function addDeleteButton(section) {
-            const header = section.querySelector('div'); 
+            const header = section.querySelector('div');
             if(header.querySelector('.delete-btn')) return;
             const btn = document.createElement('button');
             btn.type = 'button'; btn.className = 'delete-btn';
@@ -1470,15 +1059,15 @@
         }
 
         addObjectBtn.addEventListener('click', () => {
-            objectCounter++; 
+            objectCounter++;
             const newSection = document.createElement('div');
             newSection.className = 'object-section';
             newSection.innerHTML = objectsContainer.querySelector('.object-section').innerHTML;
-            newSection.querySelector('h4').textContent = `Zusätzliches Objekt`; 
+            newSection.querySelector('h4').textContent = `Zusätzliches Objekt`;
             newSection.querySelectorAll('input, select, textarea').forEach(el => {
                 if (el.name) el.name = el.name.replace(/obj\d+/, `obj${objectCounter}`);
                 if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
-                else if (el.type === 'color') el.value = '#3498db'; 
+                else if (el.type === 'color') el.value = '#3498db';
                 else if (el.tagName === 'SELECT') el.selectedIndex = 0;
                 else { el.value = ''; if (el.tagName === 'TEXTAREA') el.style.height = 'auto'; }
             });
@@ -1487,6 +1076,7 @@
             if(area) setupAutoExpand(area);
             objectsContainer.appendChild(newSection);
             updateProgressBar();
+            applyRoleVisibility();
         });
 
         addInteractionBtn.addEventListener('click', () => {
@@ -1497,12 +1087,11 @@
             newSection.querySelector('h4').textContent = `Zusätzliche Interaktion`;
             newSection.querySelectorAll('input, select, textarea').forEach(el => {
                 if (el.name) el.name = el.name.replace(/interaction\d+/, `interaction${interactionCounter}`);
-                if (el.type === 'checkbox') {
-                    el.checked = false;
-                } else if (el.tagName === 'SELECT') el.selectedIndex = 0;
-                else el.value = ''; 
+                if (el.type === 'checkbox') el.checked = false;
+                else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+                else el.value = '';
             });
-            
+           
             const customDiv = newSection.querySelector('.custom-interaction-field');
             if(customDiv) customDiv.style.display = 'none';
             const typeSelect = newSection.querySelector('.interaction-type-select');
@@ -1516,8 +1105,6 @@
             updateProgressBar();
         });
 
-
-        // --- 6. UI HELPER ---
         function setupAutoExpand(el) {
             el.addEventListener('input', function() {
                 this.style.height = 'auto';
@@ -1564,7 +1151,7 @@
         setupSelectToggle('b_field_select', 'b_field_custom_container');
         setupSelectToggle('diag_x_select', 'diag_x_custom');
         setupSelectToggle('diag_y_select', 'diag_y_custom');
-        
+       
         const initIntSel = document.querySelector('.interaction-type-select');
         const initIntCust = document.querySelector('.custom-interaction-field');
         if(initIntSel && initIntCust) {
@@ -1598,11 +1185,11 @@
                     </div>
                     <div style="margin-bottom: 12px;">
                         <label style="display: block; font-size: 0.9em; color: #555; margin-bottom: 4px;">Button-Beschriftung:</label>
-                        <input type="text" name="scenario_label_TEMP" placeholder="z.B. 'Fall A'">
+                        <input type="text" name="scenario_label_TEMP" placeholder="z.B. 'Fall A'" style="width: 100%">
                     </div>
                     <div>
                         <label style="display: block; font-size: 0.9em; color: #555; margin-bottom: 4px;">Funktion:</label>
-                        <input type="text" name="scenario_desc_TEMP" placeholder="z.B. Masse=5">
+                        <input type="text" name="scenario_desc_TEMP" placeholder="z.B. Masse=5" style="width: 100%;">
                     </div>
                 `;
                 div.querySelector('.delete-btn').addEventListener('click', function() {
@@ -1619,69 +1206,18 @@
         function updateScenarioNumbering() {
             const allScenarios = scenariosContainer.querySelectorAll('.scenario-card');
             allScenarios.forEach((div, index) => {
-                const newNum = index + 1; 
+                const newNum = index + 1;
                 div.querySelector('.scenario-title').textContent = `Szenario-Button ${newNum}`;
                 div.querySelector('input[name^="scenario_label_"]').name = `scenario_label_${newNum}`;
                 div.querySelector('input[name^="scenario_desc_"]').name = `scenario_desc_${newNum}`;
             });
         }
 
-
-        // --- 7. VORLAGEN & SPEICHER-LOGIK ---
-        const TEMPLATES = {
-            pendulum: {
-                counts: { obj: 2, int: 1, scen: 0 },
-                formValues: {
-                    "anim_title": "Fadenpendel Simulation",
-                    "learning_goal": "Untersuchung der Energieerhaltung (Potentiell <-> Kinetisch) und der Periodendauer.",
-                    "gravity": "earth",
-                    "core_principle": ["Energieerhaltungssatz", "Newtonsche Gesetze"],
-                    "obj1_name": "Aufhängung", "obj1_shape": "Rechteck/Quader", "obj1_fixed": "yes", "obj1_pos": "0, 10", "obj1_color": "#333333",
-                    "obj2_name": "Pendelmasse", "obj2_shape": "Kreis/Kugel", "obj2_mass": "2", "obj2_pos": "5, 5", "obj2_color": "#e74c3c",
-                    "interaction1_type": "Seilkraft", "interaction1_objA": "Aufhängung", "interaction1_objB": "Pendelmasse", 
-                    "interaction1_active": "on", "interaction1_show_vector": "on",
-                    "add_diagram": "on", "diagram_type": "Liniendiagramm (Zeitverlauf)", "diagram_x_axis": "Zeit (t)", "diagram_y_axis": "Energie (kin/pot)",
-                    "controls": ["Start / Pause", "Reset (Neu starten)", "Zeitlupe (Slow Motion)"]
-                }
-            },
-            collision: {
-                counts: { obj: 2, int: 1, scen: 2 },
-                formValues: {
-                    "anim_title": "Elastischer Stoß (Impulserhaltung)",
-                    "learning_goal": "Demonstration von Impuls- und Energieerhaltung bei zentralem Stoß.",
-                    "gravity": "none", "medium": "vacuum",
-                    "core_principle": ["Impulserhaltungssatz", "Energieerhaltungssatz"],
-                    "obj1_name": "Kugel Links", "obj1_shape": "Kreis/Kugel", "obj1_mass": "5", "obj1_pos": "-5, 0", "obj1_vel": "4, 0", "obj1_color": "#3498db", "obj1_bounciness": "1",
-                    "obj2_name": "Kugel Rechts", "obj2_shape": "Kreis/Kugel", "obj2_mass": "5", "obj2_pos": "5, 0", "obj2_vel": "-4, 0", "obj2_color": "#e74c3c", "obj2_bounciness": "1",
-                    "interaction1_type": "Kollision", "interaction1_objA": "Kugel Links", "interaction1_objB": "Kugel Rechts", "interaction1_params": "Vollkommen elastischer Stoß (e=1)",
-                    "interaction1_active": "on",
-                    "add_diagram": "on", "diagram_y_axis": "Geschwindigkeit (v)",
-                    "scenario_label_1": "Gleiche Masse", "scenario_desc_1": "M1 = M2 = 5kg",
-                    "scenario_label_2": "Schweres Ziel", "scenario_desc_2": "M1 = 5kg, M2 = 50kg (Ruhend)"
-                }
-            },
-            orbit: {
-                counts: { obj: 2, int: 1, scen: 0 },
-                formValues: {
-                    "anim_title": "Planetenbahn (Gravitation)",
-                    "learning_goal": "Visualisierung der Keplerschen Gesetze und gravitative Anziehung.",
-                    "gravity": "none", // Wir nutzen die Interaktion Gravitation
-                    "core_principle": ["Gravitationsgesetz", "Drehimpulserhaltung"],
-                    "obj1_name": "Sonne", "obj1_shape": "Kreis/Kugel", "obj1_mass": "1000", "obj1_size": "2", "obj1_fixed": "yes", "obj1_pos": "0, 0", "obj1_color": "#f1c40f",
-                    "obj2_name": "Erde", "obj2_shape": "Kreis/Kugel", "obj2_mass": "10", "obj2_pos": "10, 0", "obj2_vel": "0, 8", "obj2_color": "#3498db",
-                    "interaction1_type": "Gravitation_Newton", "interaction1_objA": "Sonne", "interaction1_objB": "Erde", "interaction1_show_vector": "on",
-                    "interaction1_active": "on",
-                    "viz_in_anim": ["Spur/Trajektorie", "Geschwindigkeitspfeile", "Kraftpfeile"],
-                    "add_diagram": "on", "diagram_type": "Scatterplot (Phasenraum)", "diagram_x_axis": "Position (x)", "diagram_y_axis": "Position (y)"
-                }
-            }
-        };
-
         function saveToStorage() {
             const formData = new FormData(form);
             const data = {};
             for (const [key, value] of formData.entries()) {
-                if (data[key]) { if (!Array.isArray(data[key])) data[key] = [data[key]]; data[key].push(value); } 
+                if (data[key]) { if (!Array.isArray(data[key])) data[key] = [data[key]]; data[key].push(value); }
                 else { data[key] = value; }
             }
             const state = {
@@ -1693,7 +1229,6 @@
         }
 
         function restoreState(state) {
-            // Struktur herstellen
             while (objectCounter < state.counts.obj) addObjectBtn.click();
             while (interactionCounter < state.counts.int) addInteractionBtn.click();
             let currentScenarios = document.querySelectorAll('.scenario-card').length;
@@ -1703,11 +1238,11 @@
                 for (const [key, value] of Object.entries(state.formValues)) {
                     const inputs = form.querySelectorAll(`[name="${key}"]`);
                     if (inputs.length > 0) {
-                        if (inputs[0].type === 'radio') { inputs.forEach(radio => { if (radio.value === value) radio.checked = true; }); } 
+                        if (inputs[0].type === 'radio') { inputs.forEach(radio => { if (radio.value === value) radio.checked = true; }); }
                         else if (inputs[0].type === 'checkbox') {
                             const valArray = Array.isArray(value) ? value : [value];
                             inputs.forEach(cb => { cb.checked = valArray.includes(cb.value); });
-                        } 
+                        }
                         else {
                             inputs[0].value = value;
                             if (key.includes('_select') && value === 'custom') inputs[0].dispatchEvent(new Event('change'));
@@ -1717,26 +1252,20 @@
                         }
                     }
                 }
-                updateProgressBar(); // Update nach Restore
+                updateProgressBar();
             }, 50);
         }
 
         function loadFromStorage() {
             const savedRaw = localStorage.getItem(storageKey);
-            if (!savedRaw) {
-                updateProgressBar();
-                return;
-            }
+            if (!savedRaw) { updateProgressBar(); return; }
             try { restoreState(JSON.parse(savedRaw)); } catch (e) { console.error(e); }
         }
 
-        // --- START LOGIK (Landing Page) ---
-        // Vorlagen Klick
         document.querySelectorAll('.template-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const type = btn.getAttribute('data-type') || e.currentTarget.getAttribute('data-type');
+                const type = btn.getAttribute('data-type');
                 saveRoleSelection();
-                if(!type) return; // defensive
                 if(confirm("Vorlage laden?")) {
                     localStorage.removeItem(storageKey);
                     localStorage.setItem('pending_template', JSON.stringify(TEMPLATES[type]));
@@ -1745,16 +1274,16 @@
             });
         });
 
-        // Leeres Projekt Klick
         if (startAppBtn) {
             startAppBtn.addEventListener('click', () => {
                 saveRoleSelection();
                 document.body.style.overflow = 'auto';
                 landingOverlay.style.opacity = '0';
-                landingOverlay.style.transform = 'scale(1.1)'; 
+                landingOverlay.style.transform = 'scale(1.1)';
+               
                 const wrapper = document.getElementById('post-landing-wrapper');
-                setTimeout(() => { 
-                    landingOverlay.style.display = 'none'; 
+                setTimeout(() => {
+                    landingOverlay.style.display = 'none';
                     if (wrapper) wrapper.classList.add('enter');
                 }, 500);
 
@@ -1763,12 +1292,11 @@
                     if(confirm("Mit LEEREM Formular starten?")) {
                         localStorage.removeItem(storageKey);
                         form.reset();
-                        // Alles dynamische löschen
                         document.querySelectorAll('.object-section').forEach((el, idx) => { if(idx > 0) el.remove(); });
                         document.querySelectorAll('.interaction-section').forEach((el, idx) => { if(idx > 0) el.remove(); });
                         document.getElementById('scenarios-container').innerHTML = '';
                         objectCounter = 1; interactionCounter = 1;
-                        saveToStorage(); 
+                        saveToStorage();
                         updateProgressBar();
                     }
                 }
@@ -1803,28 +1331,23 @@
             if (hypoSection) {
                 hypoSection.style.display = (role === 'teacher') ? 'none' : 'block';
             }
+            const teacherElements = document.querySelectorAll('.teacher-only');
+            teacherElements.forEach(el => {
+                el.style.display = (role === 'teacher') ? 'block' : 'none';
+            });
         }
 
-        // Init Sequence
         const pendingTemplate = localStorage.getItem('pending_template');
         if(pendingTemplate) {
-            // 1. Scrollen erlauben
             document.body.style.overflow = 'auto';
-            
-            // 2. Overlay verstecken
             if(landingOverlay) landingOverlay.style.display = 'none';
-            
-            // 3. Haupt-Formular sichtbar machen (DAS HAT GEFEHLT!)
             const wrapper = document.getElementById('post-landing-wrapper');
             if (wrapper) wrapper.classList.add('enter');
-
-            // 4. Daten wiederherstellen
             restoreState(JSON.parse(pendingTemplate));
             localStorage.removeItem('pending_template');
             applyRoleVisibility();
             setTimeout(saveToStorage, 600);
         } else {
-            // Beim Start auf Landing Page Hintergrund sperren
             document.body.style.overflow = 'hidden';
             loadFromStorage();
             const savedRole = localStorage.getItem('physics_user_role');
@@ -1834,29 +1357,34 @@
             }
         }
 
-
-        // --- 8. BUILD PROMPT (Daten sammeln) ---
         function buildPrompt(form) {
             const data = new FormData(form);
-            let p = []; 
+            let p = [];
+            const role = localStorage.getItem('physics_user_role') || 'student';
 
-            p.push("### ROLLE & AUFGABE ###");
-            p.push("Du bist ein Experte für Physik-Simulationen mit HTML5 Canvas und JavaScript.");
+            p.push("### TECHNISCHE KONFIGURATION ###");
+            p.push("Bitte erstelle basierend auf diesen Daten die HTML-Simulation.");
+
+            if (role === 'student') {
+                p.push("Zielgruppe: Schüler der 10. Klasse.");
+            } else {
+                p.push("Zielgruppe: Physiklehrkräfte.");
+            }
+
             const title = data.get('anim_title') || 'Physik-Sim';
             const safeTitle = title.replace(/[^a-zA-Z0-9]/g, '') || 'Animation';
-            p.push(`Erstelle eine vollständige, einzelne HTML-Datei namens '${safeTitle}.html'.`);
             p.push(`Der Titel der Seite lautet: "${title}"`);
             p.push(`Die Datei muss folgendes enthalten: <!DOCTYPE html>, <html>, <head>, <style>, <body> mit <canvas> und UI-Controls, <script> mit der kompletten Logik.`);
             p.push(`WICHTIG: Nutze KEINE externen CSS oder JS Dateien (außer CDN für Chart.js falls benötigt). Alles muss in einer Datei sein (Single File).`);
-            
+           
             p.push("\n### 1. DIDAKTISCHER RAHMEN ###");
             p.push(`Zentrales Lernziel: "${data.get('learning_goal')}". Bitte stelle sicher, dass die Visualisierung dieses Ziel unterstützt.`);
-            
+           
             const principles = getCheckedValues('core_principle', 'core_principle_other');
             if (principles.length > 0) {
                 p.push(`Die Simulation MUSS folgende physikalische Prinzipien korrekt implementieren: ${principles.join(', ')}.`);
             }
-            
+           
             if (data.get('student_hypothesis')) {
                 p.push(`\nSCHÜLER-HYPOTHESE: "${data.get('student_hypothesis')}"`);
                 p.push(`Bitte erstelle die Simulation so, dass der Schüler überprüfen kann, ob diese Vermutung stimmt (z.B. durch passende Graphen oder Anzeigen).`);
@@ -1869,7 +1397,7 @@
             else if(gravity === 'moon') gravText = "Mondbeschleunigung (g = 1.62 m/s²)";
             else if(gravity === 'custom') gravText = `Benutzerdefiniert: ${data.get('gravity_custom')} m/s²`;
             p.push(`- Gravitation: ${gravText} (wirkt global auf alle massereichen Objekte, sofern nicht anders angegeben).`);
-            
+           
             const medium = data.get('medium');
             let medText = "Vakuum (keine Reibung)";
             if(medium === 'air') medText = "Luft (Linearer oder quadratischer Luftwiderstand)";
@@ -1877,7 +1405,6 @@
             else if(medium === 'other') medText = `Spezialmedium: ${data.get('medium_custom')}`;
             p.push(`- Umgebungsmedium: ${medText}.`);
 
-            // Felder
             if (data.get('e_field')) {
                 let d = data.get('e_field_select') === 'custom' ? data.get('e_field_custom') : data.get('e_field_select');
                 p.push(`- Globales Elektrisches Feld (E-Feld): Stärke ${data.get('e_field_strength')} N/C, Richtung Vektor [${d}].`);
@@ -1904,16 +1431,16 @@
                 const shape = sect.querySelector(`select[name*="_shape"]`).value;
                 const color = sect.querySelector(`input[name*="_color"]`).value;
                 const fixed = sect.querySelector(`input[name*="_fixed"]`).checked;
-                
+               
                 const mass = sect.querySelector(`input[name*="_mass"]`).value;
                 const size = sect.querySelector(`input[name*="_size"]`).value;
                 const charge = sect.querySelector(`input[name*="_charge"]`).value;
                 const bounce = sect.querySelector(`input[name*="_bounciness"]`).value;
-                
+               
                 const pos = sect.querySelector(`input[name*="_pos"]`).value;
                 const vel = sect.querySelector(`input[name*="_vel"]`).value;
                 const note = sect.querySelector(`textarea[name*="_note"]`).value;
-                
+               
                 p.push(`\n**Objekt ${i}: ${name}**`);
                 p.push(`  - Visuell: Form=${shape}, Farbe=${color}, Radius/Größe=${size || 'Standard'}.`);
                 p.push(`  - Physik: Masse=${mass || 1} kg, Ladung=${charge || 0} C, Elastizität=${bounce || 0.8}.`);
@@ -1926,7 +1453,7 @@
             p.push("Implementiere folgende Wechselwirkungen in jedem Simulationsschritt:");
             const interactionSections = document.querySelectorAll('.interaction-section');
             if (interactionSections.length === 0) p.push("(Keine spezifischen Interaktionen definiert, nur Standard-Physik).");
-            
+           
             interactionSections.forEach((section, index) => {
                 const type = section.querySelector('select').value;
                 if (type !== 'none') {
@@ -1935,12 +1462,12 @@
                     const isActive = section.querySelector(`input[name*="_active"]`).checked;
                     const showVec = section.querySelector(`input[name*="_show_vector"]`).checked;
                     const params = section.querySelector('textarea').value;
-                    
+                   
                     p.push(`- Interaktion ${index+1}: Typ '${type}' zwischen "${a}" und "${b}".`);
                     p.push(`  - Initial-Status: ${isActive ? 'Aktiv' : 'Pausiert'}.`);
                     p.push(`  - Visualisierung: ${showVec ? 'Zeichne Kraftvektor' : 'Kein Vektor'}.`);
                     if(params) p.push(`  - Parameter: ${params}`);
-                    
+                   
                     if(type === 'custom') {
                         const formula = section.querySelector(`input[name*="_custom_formula"]`).value;
                         p.push(`  - WICHTIG - EIGENE FORMEL: Implementiere exakt diese Logik: "${formula}".`);
@@ -1951,24 +1478,26 @@
             p.push("\n### 5. VISUALISIERUNG & UI ###");
             const viz = getCheckedValues('viz_in_anim');
             if (data.get('viz_custom_active')) viz.push(data.get('viz_custom_text'));
-            
-            if(viz.length) {
-                p.push(`Zeichne folgende Overlays in jedem Frame: ${viz.join(', ')}.`);
-            }
-            
-            // Diagramm
+            if(viz.length) { p.push(`Zeichne folgende Overlays in jedem Frame: ${viz.join(', ')}.`); }
+           
             if(data.get('add_diagram')) {
                 const type = data.get('diagram_type');
                 let dx = data.get('diagram_x_axis'); if(dx==='custom') dx = data.get('diagram_x_custom');
                 let dy = data.get('diagram_y_axis'); if(dy==='custom') dy = data.get('diagram_y_custom');
+                const xMin = data.get('diag_x_min'); const xMax = data.get('diag_x_max');
+                const yMin = data.get('diag_y_min'); const yMax = data.get('diag_y_max');
+
                 p.push(`\n**Feature: Echtzeit-Diagramm**`);
-                p.push(`  - Erstelle ein Canvas oder nutze Plotly/Chart.js für ein ${type}.`);
+                p.push(`  - Typ: ${type}.`);
                 p.push(`  - X-Achse: ${dx}`);
                 p.push(`  - Y-Achse: ${dy}`);
-                p.push(`  - Das Diagramm soll sich live aktualisieren.`);
+                if (xMin && xMax) p.push(`  - WICHTIG: Die X-Achse muss FEST skaliert sein von ${xMin} bis ${xMax}. Kein mitlaufendes Fenster!`);
+                else p.push(`  - X-Achse: Auto-Scaling.`);
+                if (yMin && yMax) p.push(`  - WICHTIG: Die Y-Achse muss FEST skaliert sein von ${yMin} bis ${yMax}.`);
+                else p.push(`  - Y-Achse: Auto-Scaling.`);
+                p.push(`  - Das Diagramm soll den Verlauf innerhalb dieser Grenzen zeigen.`);
             }
-            
-            // Tabelle
+           
             if(data.get('add_table')) {
                 const cols = getCheckedValues('table_cols');
                 p.push(`\n**Feature: Data Logger (Tabelle)**`);
@@ -1977,12 +1506,10 @@
                 if(data.get('table_export_csv')) p.push(`  - Füge einen Button 'CSV Export' hinzu, um die Daten herunterzuladen.`);
             }
 
-            // Controls
             const controls = getCheckedValues('controls');
             p.push(`\n**Steuerungselemente:**`);
             p.push(`Implementiere Buttons für: ${controls.join(', ')}.`);
-            
-            // Szenarien
+           
             const scenarioLabels = [];
             document.querySelectorAll('input[name^="scenario_label_"]').forEach(input => {
                 const id = input.name.split('_')[2];
@@ -1994,7 +1521,6 @@
                 scenarioLabels.forEach(s => p.push(`  - ${s}`));
             }
 
-            // Didaktik
             const method = data.get('didactic_method');
             if(method !== 'none') {
                 p.push(`\n**Didaktische Methode:** ${method}`);
@@ -2009,14 +1535,14 @@
             }
 
             p.push("\n### 6. TECHNISCHE IMPLEMENTIERUNG (SEHR WICHTIG) ###");
-            p.push("1. **Code-Qualität:** Schreibe sauberen, modernen ES6 JavaScript Code. Nutze Klassen für Objekte.");
-            p.push("2. **Physik-Engine:** Verwende eine numerische Integration (Euler-Verfahren oder besser Velocity Verlet) für stabile Simulationen. Delta-Time (dt) muss genutzt werden.");
-            p.push("3. **Single File:** Der gesamte Code (HTML, CSS, JS) muss in EINER einzigen Datei sein. Keine externen CSS/JS Files (außer CDN Bibliotheken für Plots).");
-            p.push("4. **Canvas:** Nutze das HTML5 Canvas Element für die Rendering-Schleife (requestAnimationFrame).");
-            p.push("5. **Styling:** Das Design soll modern, hell und freundlich sein (passend für Schulen). Nutze CSS Flexbox/Grid für das Layout.");
-            p.push("6. **Error Handling:** Der Code muss robust sein. Wenn Inputs fehlen, nutze sinnvolle Defaults.");
-            p.push("7. **Vollständigkeit:** Implementiere ALLE oben genannten Anforderungen. Lasse nichts weg.");
-
+            p.push("1. **Code-Qualität:** Schreibe sauberen, modernen ES6 JavaScript Code. Nutze Klassen für Objekte (z.B. class PhysicsObject).");
+            p.push("2. **Physik-Engine & Delta-Time:** Verwende eine stabile numerische Integration (z.B. Velocity Verlet oder Semi-Implicit Euler). Arbeite zwingend mit Delta-Time (dt). WICHTIG: Begrenze dt (z.B. `dt = Math.min(dt, 0.05)`), damit die Simulation nach Tab-Wechseln nicht explodiert!");
+            p.push("3. **Einheiten, Maßstab & Koordinatensystem (CRITICAL):** Die Physik-Logik rechnet in SI-Einheiten (Meter, kg, Sekunden). Der Canvas zeichnet in Pixeln. Definiere zwingend einen Umrechnungsfaktor (z.B. `const SCALE = 50; // 1m = 50px`). Denke daran, dass im Canvas die Y-Achse nach UNTEN zeigt. Transformiere die Zeichen-Koordinaten entsprechend, damit Objekte korrekt nach unten fallen!");
+            p.push("4. **Kollisionen & Grenzen:** Implementiere eine robuste Kollisionsauflösung. Wende bei Stößen 'Positional Correction' (Separation) an, damit Objekte nicht ineinander stecken bleiben. Die Canvas-Ränder sollen als harte Wände dienen, an denen Objekte abprallen (außer bei Planetenbahnen).");
+            p.push("5. **Single File:** Der gesamte Code (HTML, CSS, JS) muss in EINER einzigen Datei sein. Keine externen CSS/JS Files (außer CDN Bibliotheken für Plots wie Chart.js).");
+            p.push("6. **Styling & UI-Layout:** Das Design soll modern und hell sein. Lege UI-Elemente (Buttons, Diagramm-Container, Info-Boxen) als schwebende Overlays (mit `position: absolute` und hohem `z-index`) über den Canvas oder nutze ein sauberes CSS-Grid, bei dem der Canvas nicht von der UI zerdrückt wird.");
+            p.push("7. **Layout-Stabilisierung (CRITICAL):** Setze im CSS zwingend: `body, html { margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }`. Der Canvas-Hintergrund muss exakt `window.innerWidth` und `window.innerHeight` füllen. Verhindere Scrollbalken!");
+            p.push("8. **Vollständigkeit:** Der Code muss robust sein. Setze sinnvolle Defaults für leere Felder. Implementiere ALLE oben genannten Anforderungen vollständig.");
             return p.join('\n');
         }
 
@@ -2033,12 +1559,96 @@
             return values;
         }
 
+        const downloadBtn = document.getElementById('download-protocol-btn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', () => {
+                try {
+                    const now = new Date();
+                    const timestamp = now.toLocaleString('de-DE');
+                    const filenameDate = now.toISOString().slice(0,10) + '_' + now.getHours() + '-' + now.getMinutes();
+                   
+                    const formData = new FormData(form);
+                    let tableRows = '';
+                   
+                    for (let [key, value] of formData.entries()) {
+                        if(value.trim() === '' || key.includes('_TEMP') || key === 'hidden_prompt_injection') continue;
+                       
+                        let labelText = key;
+                        const input = form.querySelector(`[name="${key}"]`);
+                        if(input) {
+                            let label = input.closest('label');
+                            if(!label && input.id) label = document.querySelector(`label[for="${input.id}"]`);
+                            if(label) labelText = label.innerText.replace(/[\n\r]+|[*]|Anmerkung:|Aktiv|Vektor zeigen/g, '').trim();
+                            if(input.type === 'radio' && label) {
+                                const cardTitle = label.querySelector('.card-title');
+                                if(cardTitle) labelText = "System: " + cardTitle.innerText;
+                            }
+                        }
+                        tableRows += `<tr style="border-bottom: 1px solid #eee;"><td style="padding: 10px; font-weight: bold; color: #444; width: 40%;">${labelText}</td><td style="padding: 10px; color: #000;">${value}</td></tr>`;
+                    }
+
+                    const escapeHTML = (str) => str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                    const rawPrompt = document.getElementById('generated-prompt').value || "Kein Prompt.";
+                    const promptText = escapeHTML(rawPrompt);
+                    const chatField = document.getElementById('chat-history-input');
+                    const rawChat = chatField && chatField.value.trim() !== "" ? chatField.value : "Kein Chat-Verlauf eingefügt.";
+                    const chatText = escapeHTML(rawChat);
+
+                    const reportContent = `
+                    <!DOCTYPE html>
+                    <html lang="de">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Protokoll: ${formData.get('anim_title') || 'Physik-Sim'}</title>
+                        <style>
+                            body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 40px; background: #fff; }
+                            h1 { color: #005A9C; border-bottom: 3px solid #005A9C; padding-bottom: 15px; margin-bottom: 30px; }
+                            h2 { margin-top: 50px; background: #e3f2fd; padding: 12px 20px; border-radius: 8px; color: #005A9C; font-size: 1.4em; }
+                            table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95em; }
+                            td { vertical-align: top; }
+                            .content-box { background: #f8f9fa; padding: 20px; border: 1px solid #ccc; border-radius: 5px; font-family: monospace; white-space: pre-wrap; font-size: 0.9em; }
+                            .chat-box { background: #fff3e0; border-color: #ffe0b2; font-family: sans-serif; }
+                            .meta { background: #eee; padding: 15px; border-radius: 8px; margin-bottom: 40px; }
+                            .footer { margin-top: 80px; font-size: 0.8em; text-align: center; color: #999; border-top: 1px solid #eee; padding-top: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>🧪 Experiment-Protokoll</h1>
+                        <div class="meta">
+                            <strong>Datum:</strong> ${timestamp}<br>
+                            <strong>Rolle:</strong> ${localStorage.getItem('physics_user_role') === 'teacher' ? 'Lehrer:in' : 'Schüler:in'}
+                        </div>
+                        <h2>1. Chat-Verlauf (Eingefügt)</h2>
+                        <div class="content-box chat-box">${chatText}</div>
+                        <h2>2. Konfiguration</h2>
+                        <table>${tableRows}</table>
+                        <h2>3. Generierter Prompt</h2>
+                        <div class="content-box">${promptText}</div>
+                        <div class="footer">Erstellt mit dem Physik-Sim Konfigurator der LMU München</div>
+                    </body>
+                    </html>`;
+
+                    const blob = new Blob([reportContent], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Protokoll_${filenameDate}.html`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                } catch (err) {
+                    alert("Fehler: " + err.message);
+                    console.error(err);
+                }
+            });
+        }
+
         } catch (e) {
             console.error('Initialization error', e);
             alert('Fehler im Skript: ' + (e && e.message ? e.message : e));
         }
     });
 </script>
-
 </body>
 </html>
