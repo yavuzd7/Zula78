@@ -164,30 +164,15 @@
   <div class="container">
     <div class="card">
       <h1>Gemini API – Chat-Demo</h1>
-      <p class="sub">Dialog mit <code>gemini-2.5-flash</code></p>
 
       <div id="reception-alert">
           ⬇️ <strong>Prompt empfangen!</strong> Bitte unten überprüfen und auf "Anfrage senden" klicken.
       </div>
 
       <div class="grid">
-        <div class="row-2">
-          <div>
-            <label for="apiKey">API-Key</label>
-            <input id="apiKey" type="password" placeholder="AIza... (oder leer lassen)" autocomplete="off" />
-            <label class="checkbox">
-              <input id="remember" type="checkbox" />
-              API-Key lokal speichern
-            </label>
-          </div>
-          <div>
-            <label for="model">Modell</label>
-            <select id="model">
-              <option value="gemini-2.5-flash">gemini-2.5-flash</option>
-            </select>
-            <label for="timeout" style="margin-top:12px; display:block;">Timeout (ms)</label>
-            <input id="timeout" type="text" value="250000" />
-          </div>
+
+        <div id="chat-hint" style="display: none; background: rgba(120, 166, 255, 0.1); border: 1px solid var(--accent); padding: 12px; border-radius: 8px; margin-bottom: 5px; color: var(--text); font-size: 13px;">
+            💡 <strong>Tipp:</strong> Probier die Simulation jetzt unten aus! Scrolle danach wieder hier hoch und <strong>antworte Tutor Newton</strong> auf seine Frage im Chat.
         </div>
 
         <div class="row">
@@ -202,6 +187,9 @@
             <span class="btn-text">➤ Anfrage senden</span>
             <span class="spinner"></span>
           </button>
+          
+          <button id="copyChat" style="border-color: var(--ok); color: var(--ok);">📋 Chat kopieren</button>
+          
           <button id="clear">Chat-Verlauf löschen</button>
         </div>
         
@@ -238,7 +226,7 @@
               </button>
           </div>
           <div style="font-size: 12px; color: var(--muted); margin-top: 5px;">
-              Klicke hier, um Fehler an die KI zu melden. Der Code wird basierend auf deinem Feedback neu generiert.
+              Klicke auf "Code korrigieren", um Fehler an die KI zu melden. Der Code wird basierend auf deinem Feedback neu generiert.
           </div>
       </div>
 
@@ -246,22 +234,37 @@
 
   </div>
 
-  <script>
+<script>
     // --- 1. KOMMUNIKATION MIT KONFIGURATOR ---
+    
+    // HIER legen wir die Variable ganz am Anfang an, damit sie überall bekannt ist!
+    let currentSecretInstruction = ""; 
+
     window.addEventListener("message", function(event) {
-        var receivedText = event.data;
-        if (receivedText && typeof receivedText === 'string') {
+        const data = event.data;
+        
+        // Prüfen, ob das neue Daten-Objekt (mit den geheimen Infos) ankommt
+        if (data && typeof data === 'object' && data.visiblePrompt) {
             var targetField = document.getElementById("prompt");
             var alertBox = document.getElementById("reception-alert");
+            
             if (targetField) {
-                targetField.value = receivedText;
-                if (alertBox) {
-                    alertBox.style.display = "block";
-                    // Nach 5 Sekunden ausblenden
-                    setTimeout(() => { alertBox.style.display = "none"; }, 5000);
-                }
+                targetField.value = data.visiblePrompt; // Nur der saubere Prompt ist sichtbar
                 targetField.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+            
+            // HIER speichern wir die geheime Anweisung (Affenschuss-Lernziele) im Hintergrund
+            currentSecretInstruction = data.secretSystemInstruction || "";
+            
+            if (alertBox) {
+                alertBox.style.display = "block";
+                setTimeout(() => { alertBox.style.display = "none"; }, 5000);
+            }
+        } 
+        // Fallback, falls doch nur ein normaler Text geschickt wird
+        else if (typeof event.data === 'string') {
+            var targetField = document.getElementById("prompt");
+            if (targetField) { targetField.value = event.data; }
         }
     });
 
@@ -275,24 +278,43 @@
         else if(elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
     }
 
-    try {
-        const s = localStorage.getItem("gemini_key_v2");
-        if(s){ $("apiKey").value=atob(s); $("remember").checked=true; }
-    } catch(e){}
-
     function renderHistory() {
         const out = $("textOut");
         out.innerHTML = "";
+        
         chatHistory.forEach(turn => {
             const div = document.createElement("div");
             div.className = `chat-turn role-${turn.role}`;
-            let txt = turn.parts[0].text
-                .replace(/</g, "&lt;")
-                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                .replace(/```([\s\S]*?)```/g, "<pre><code>$1</code></pre>");
-            div.innerHTML = `<div class="chat-role">${turn.role}</div> ${txt}`;
+            
+            // WICHTIG: Sagt dem Browser, dass er die echten Zeilenumbrüche der KI im Text anzeigen soll!
+            div.style.whiteSpace = "pre-wrap"; 
+            
+            let txt = turn.parts[0].text;
+            
+            // 1. HTML-Tags maskieren (damit der Code als Text und nicht als Webseite gerendert wird)
+            txt = txt.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            
+            // 2. Den riesigen Code-Block in ein einklappbares Menü (<details>) verwandeln!
+            txt = txt.replace(/```(?:html|javascript|css|js)?\s*([\s\S]*?)```/gi, 
+                `<details style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; border: 1px dashed var(--accent);">
+                    <summary style="cursor: pointer; font-weight: bold; color: var(--accent); outline: none;">
+                        💻 Generierter Simulations-Code (Klicken zum Einblenden)
+                    </summary>
+                    <pre style="margin-top: 15px; overflow-x: auto; white-space: pre; font-size: 11px;"><code>$1</code></pre>
+                </details>`
+            );
+            
+            // 3. Fettgedruckten Text (Markdown) formatieren
+            txt = txt.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+            
+            // 4. Schönere Rollen-Namen für das Chat-Fenster
+            let roleName = turn.role === 'user' ? 'Du' : 'Tutor Newton 🍏';
+            
+            div.innerHTML = `<div class="chat-role">${roleName}</div> ${txt}`;
             out.appendChild(div);
         });
+        
+        // Immer brav nach unten scrollen im Chat
         out.scrollTop = out.scrollHeight;
     }
 
@@ -306,21 +328,33 @@
 
     // --- ZENTRALE SENDE-FUNKTION (Handles normal & debug) ---
     async function sendRequest(promptText, isDebug = false) {
-        const key = $("apiKey").value.trim();
-        const model = $("model").value;
-        const timeout = parseInt($("timeout").value) || 250000;
-
-        if(!key) { alert("API Key fehlt!"); return; }
+        // ACHTUNG: Hier deinen API Key eintragen!
+        const key = "AIzaSyBuTw7nQeimIsNL55J-HGfsAr1o7vsXZDQ"; 
+        const model = "gemini-2.5-pro"; 
+        
         if(!promptText) { alert("Kein Text!"); return; }
 
-        if($("remember").checked) localStorage.setItem("gemini_key_v2", btoa(key));
+        // --- GEHEIME SYSTEMANWEISUNGEN FÜR DIE KI ---
+        const role = localStorage.getItem('physics_user_role') || 'student';
+        let finalSystemInstruction = "";
+
+        if (role === 'student') {
+            // Wenn die Vorlage (z.B. Affenschuss) geheime Lernziele geschickt hat:
+            if (currentSecretInstruction && currentSecretInstruction.trim() !== "") {
+                 finalSystemInstruction = "Du bist ein geduldiger KI-Physik-Tutor für die 10. Klasse.\n" + currentSecretInstruction;
+            } else {
+                 // Standard-Regel für alle anderen, freien Schüler-Experimente:
+                 finalSystemInstruction = "Du bist ein geduldiger KI-Physik-Tutor für die 10. Klasse. Verrate niemals sofort die Lösung. Nutze den sokratischen Dialog (Leitfragen), um den Schüler selbst auf die physikalischen Gesetzmäßigkeiten kommen zu lassen.";
+            }
+        } else {
+            finalSystemInstruction = "Du bist ein hochprofessioneller KI-Labor-Assistent für Physiklehrkräfte. Das Themenspektrum ist offen. Erzeuge didaktisch wertvolle, hochpräzise Fachsimulationen.";
+        }
 
         // UI States
         const btnSend = $("send");
         const btnDebug = $("debug-send");
         const stat = $("status");
         
-        // Buttons deaktivieren
         btnSend.disabled = true; btnSend.classList.add("loading");
         btnDebug.disabled = true; if(isDebug) btnDebug.classList.add("loading");
         
@@ -331,18 +365,27 @@
         chatHistory.push({ role: "user", parts: [{ text: promptText }] });
         renderHistory();
         
-        // Felder leeren
+        // Felder 
         if(!isDebug) $("prompt").value = ""; 
         else $("debug-input").value = "";
 
         try {
+            // --- HIER WIRD DAS PAKET GEPACKT ---
+            const requestBody = {
+                system_instruction: {
+                    parts: [{ text: finalSystemInstruction }] // Die KI bekommt heimlich ihre Befehle
+                },
+                contents: chatHistory // Der normale Chat-Verlauf
+            };
+
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: chatHistory })
+                body: JSON.stringify(requestBody) // Wir senden das komplette Paket!
             });
 
             const data = await response.json();
+            
             if(!response.ok) throw new Error(data.error?.message || "Fehler");
 
             const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Keine Antwort";
@@ -350,7 +393,9 @@
             renderHistory();
             stat.textContent = "Fertig.";
             stat.className = "status ok";
-
+            $("chat-hint").style.display = "block";
+            $("prompt").placeholder = "Antworte Tutor Newton hier...";
+            
             // Code verarbeiten & anzeigen
             const code = extractCode(aiText);
             if(code) {
@@ -409,6 +454,40 @@
         $("animation-container").style.display="none";
     });
 
+    // 4. Chat Copy (NEU)
+    $("copyChat").addEventListener("click", () => {
+        if (chatHistory.length === 0) {
+            alert("Noch kein Chat-Verlauf vorhanden!");
+            return;
+        }
+
+        // Text schön formatieren für das Protokoll
+        let textLog = "--- CHAT PROTOKOLL START ---\n\n";
+        chatHistory.forEach((entry, index) => {
+            const role = entry.role === 'user' ? 'SCHÜLER/LEHRER' : 'KI (GEMINI)';
+            textLog += `[#${index + 1} ${role}]:\n${entry.parts[0].text}\n\n------------------------------------------------\n\n`;
+        });
+        textLog += "--- CHAT PROTOKOLL ENDE ---";
+
+        // In Zwischenablage kopieren
+        navigator.clipboard.writeText(textLog).then(() => {
+            const btn = $("copyChat");
+            const originalText = btn.innerText;
+            
+            // Visuelles Feedback
+            btn.innerText = "✅ Kopiert!";
+            btn.style.background = "rgba(103, 232, 166, 0.2)"; // Leicht grün
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = "";
+            }, 2000);
+        }).catch(err => {
+            console.error(err);
+            alert("Fehler beim Kopieren (Browser erlaubt es evtl. nicht).");
+        });
+    });
+    
   </script>
 </body>
 </html>
