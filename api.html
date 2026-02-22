@@ -329,7 +329,9 @@
     // --- ZENTRALE SENDE-FUNKTION (Handles normal & debug) ---
     async function sendRequest(promptText, isDebug = false) {
         // API Key ist jetzt sicher im Cloudflare Worker gespeichert
-        const model = "gemini-2.5-pro"; 
+        //const model = "gemini-2.5-pro"; 
+        const model = "gemini-3.1-pro-preview"; 
+      
         
         if(!promptText) { alert("Kein Text!"); return; }
 
